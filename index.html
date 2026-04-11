@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>microDOS(2) | Precision Psychedelics, Simplified.</title>
+    <title>microDOS4U | Precision Psychedelics, Simplified.</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -781,7 +781,7 @@
                     activePlan = plans[btn.dataset.plan];
                     document.getElementById('checkout').classList.remove('hidden');
                     document.getElementById('order-summary-content').textContent = activePlan.name;
-                    document.getElementById('summary-total').textContent = `$${activePlan.price.toFixed(2)}`;
+                    document.getElementById('summary-total').textContent = `$${activePlan.price.toFixed4U}`;
                     document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
                 };
             });
@@ -822,7 +822,7 @@
 
                 document.getElementById('step-2').classList.add('hidden');
                 document.getElementById('step-3').classList.remove('hidden');
-                document.getElementById('confirm-summary-text').textContent = `Order: ${activePlan.name} for $${activePlan.price.toFixed(2)}`;
+                document.getElementById('confirm-summary-text').textContent = `Order: ${activePlan.name} for $${activePlan.price.toFixed4U}`;
                 currentStep = 3;
                 updateSteps();
             };
