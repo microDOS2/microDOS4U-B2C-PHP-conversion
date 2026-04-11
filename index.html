@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>microDOS(2) | Precision Psychedelics, Simplified.</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- IMask.js for Input Masking -->
+    <script src="https://unpkg.com/imask"></script>
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0514 !important;
+            color: #d1d5db; 
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #44f80c, #9a02d0, #ff66c4, #5c38be);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #38bdf8, #8b5cf6);
+            transition-property: transform, box-shadow;
+            transition-duration: 0.3s;
+            transition-timing-function: ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(56, 189, 248, 0.2), 0 4px 6px -2px rgba(139, 92, 246, 0.1);
+        }
+        .btn-primary:disabled {
+            background: #1a1329;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn-secondary {
+            background-color: #1a1329; /* Slate 700 */
+            border: 1px solid #475569; /* Slate 600 */
+            transition: background-color 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #475569; /* Slate 600 */
+        }
+        .card-bg {
+            background-color: #150f24; /* Slate 800 */
+        }
+        .pricing-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(125, 211, 252, 0.5);
+        }
+        .feature-icon {
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 9999px;
+            padding: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .input-field {
+            background-color: #150f24; /* Slate 800 */
+            border: 1px solid #1a1329; /* Slate 700 */
+            color: #cbd5e1; /* Slate 300 */
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #38bdf8; /* Sky 500 */
+        }
+        .input-field.is-invalid {
+            border-color: #f87171; /* Red 400 */
+        }
+        .step-active {
+            color: #7dd3fc;
+            border-bottom-color: #7dd3fc;
+        }
+        .step-inactive {
+            color: #64748b; /* Slate 500 */
+            border-bottom-color: transparent;
+        }
+        .video-dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 4px;
+            background-color: #475569; /* Slate 600 */
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+            border: 2px solid transparent;
+        }
+        .video-dot:focus {
+            outline: none;
+            border-color: #7dd3fc;
+        }
+        .video-dot.active, .video-dot:hover {
+            background-color: #7dd3fc; /* Sky 300 */
+        }
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        /* Testimonial Carousel */
+        .testimonial-carousel {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+        .testimonial-carousel:hover {
+            animation-play-state: paused;
+        }
+        .testimonial-card {
+            width: 320px;
+            padding: 0 1rem;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+        @media (min-width: 768px) {
+            .testimonial-card {
+                width: 400px;
+            }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* Video iframe styling */
+        .video-iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem; 
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); 
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 1s ease;
+        }
+            .hero-bg {
+            background: radial-gradient(circle at 20% 30%, rgba(107, 33, 168, 0.4) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 70%, rgba(68, 248, 12, 0.2) 0%, transparent 40%),
+                        #0a0514 !important;
+        }
+    
+    @media (max-width: 768px) {
+        .hero-bg h1 { font-size: 2.5rem !important; }
+        .hero-bg p { font-size: 1rem !important; }
+        .flex-col { flex-direction: column !important; }
+        .grid-cols-3 { grid-template-columns: 1fr !important; }
+        .grid-cols-4 { grid-template-columns: 1fr !important; }
+        .px-4 { padding-left: 16px !important; padding-right: 16px !important; }
+    }
+    
+
+        
+        
+        .plyr__video-embed iframe {
+            pointer-events: none;
+        }
+        .plyr--youtube .plyr__control--overlaid {
+            display: none !important;
+        }
+        .plyr__poster {
+            background-size: cover;
+        }
+        /* Hide YouTube logo and branding */
+        .plyr iframe[src*="youtube"] {
+            pointer-events: none;
+        }
+        /* Hide YouTube player chrome */
+        .plyr--video .plyr__controls {
+            opacity: 0 !important;
+        }
+        /* Force hide all YouTube UI */
+        .plyr__video-embed iframe {
+            border: none !important;
+        }
+        /* Hide YouTube watermark and logo */
+        .ytp-watermark,
+        .ytp-large-play-button,
+        .ytp-youtube-button,
+        .ytp-chrome-top,
+        .ytp-chrome-bottom,
+        .ytp-show-cards-title,
+        .ytp-pause-overlay,
+        .ytp-spinner,
+        .ytp-loader {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
+        .plyr__video-embed iframe {
+            pointer-events: none;
+        }
+        .plyr--youtube .plyr__control--overlaid {
+            display: none !important;
+        }
+        .plyr__poster {
+            background-size: cover;
+        }
+</style>
+    
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50  backdrop-blur-lg border-b border-slate-800" style="background-color: rgba(10, 5, 20, 0.7) !important;" style="background-color: #0a0514 !important;">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold cursor-pointer" onclick="window.scrollTo(0,0)"><span class="text-[#44f80c]">micro</span><span class="text-[#9a02d0]">DOS</span><span class="text-[#ff66c4]">(2)</span></div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="https://microdos2.github.io/Consumer-Direct-B2C/ARTICLESANDSTUDIES.html" class="text-slate-300 hover:text-white">Benefits</a>
+                <a href="#reviews" class="text-slate-300 hover:text-white">Reviews</a>
+                <a href="#how-it-works" class="text-slate-300 hover:text-white">How It Works</a>
+                <a href="#pricing" class="text-slate-300 hover:text-white">Pricing</a>
+                <a href="#faq" class="text-slate-300 hover:text-white">FAQ</a>
+                <a href="contact.html" class="text-slate-300 hover:text-white">Contact</a>
+                <a href="#pricing" class="hidden md:inline-block px-6 py-2 text-white font-semibold rounded-lg shadow-md btn-primary">
+                    Get Started
+                </a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700" style="background-color: #1a1329 !important;" style="background-color: #1a1329 !important;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-slate-900 border-b border-slate-800" style="background-color: #0a0514 !important;" style="background-color: #0a0514 !important;">
+            <a href="https://microdos2.github.io/Consumer-Direct-B2C/ARTICLESANDSTUDIES.html" class="block text-slate-300 hover:text-white py-2">Benefits</a>
+            <a href="#reviews" class="block text-slate-300 hover:text-white py-2">Reviews</a>
+            <a href="#how-it-works" class="block text-slate-300 hover:text-white py-2">How It Works</a>
+            <a href="#pricing" class="block text-slate-300 hover:text-white py-2">Pricing</a>
+            <a href="#faq" class="block text-slate-300 hover:text-white py-2">FAQ</a>
+            <a href="contact.html" class="block text-slate-300 hover:text-white py-2">Contact</a>
+            <a href="#pricing" class="block mt-4 w-full text-center px-6 py-3 text-white font-semibold rounded-lg shadow-md btn-primary">
+                Get Started
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg py-20 md:py-28">
+            <div class="container mx-auto px-6 text-center">
+                <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white mb-4 transition-opacity duration-500 min-h-[4rem]">
+                    <!-- Updated by JS -->
+                </h1>
+                <p id="hero-subtitle" class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-8 transition-opacity duration-500 min-h-[3rem]">
+                    <!-- Updated by JS -->
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#checkout" data-plan="trial" class="purchase-btn w-full sm:w-auto px-8 py-4 text-lg text-white font-bold rounded-lg shadow-lg btn-primary transform hover:scale-105">
+                        Start Your $12.95 Trial
+                    </a>
+                    <a href="#how-it-works" class="w-full sm:w-auto px-8 py-4 text-lg font-semibold text-white bg-slate-700 border border-slate-600 rounded-lg shadow-md hover:bg-slate-600 transition-colors" style="background-color: #1f1a2e !important;" style="background-color: #1a1329 !important;" style="background-color: #1f1a2e !important;" style="background-color: #1f1a2e !important;">
+                        Learn More
+                    </a>
+                </div>
+                <div class="mt-16 max-w-2xl mx-auto aspect-video relative">
+                    <div id="video-container" class="w-full h-full bg-slate-800 rounded-xl overflow-hidden shadow-2xl ring-1 ring-slate-700" style="background-color: #150f24 !important;" style="background-color: #150f24 !important;">
+                        <!-- Videos injected by JS -->
+                    </div>
+                </div>
+                <div id="video-dots" class="text-center mt-6">
+                    <!-- Dots inserted by JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section id="benefits" class="py-20 " style="background-color: rgba(10, 5, 20, 0.7) !important;" style="background-color: #0a0514 !important;">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <span class="text-sky-400 font-semibold">THE MICRODOS ADVANTAGE</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mt-2">A Cleaner, Clearer Experience</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="text-center p-6 card-bg rounded-xl border border-slate-800">
+                        <div class="inline-flex feature-icon mb-4">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Rapid Onset</h3>
+                        <p class="text-slate-400">Effects begin in ~10 minutes for a predictable, manageable session.</p>
+                    </div>
+                    <div class="text-center p-6 card-bg rounded-xl border border-slate-800">
+                        <div class="inline-flex feature-icon mb-4">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.085a2 2 0 00-1.736.97l-2.714 4.224a2 2 0 00.174 2.573V10h4z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">No Nausea</h3>
+                        <p class="text-slate-400">A clean formula designed to avoid the discomfort of traditional mushrooms.</p>
+                    </div>
+                    <div class="text-center p-6 card-bg rounded-xl border border-slate-800">
+                        <div class="inline-flex feature-icon mb-4">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Precision Dose</h3>
+                        <p class="text-slate-400">Each 2mg scored pill ensures a consistent, reliable microdose every time.</p>
+                    </div>
+                    <div class="text-center p-6 card-bg rounded-xl border border-slate-800">
+                        <div class="inline-flex feature-icon mb-4">
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-white mb-2">Legal & Safe</h3>
+                        <p class="text-slate-400">Not federally scheduled. Shipped discreetly and reliably to your door.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Specs -->
+        <section class="py-10 " style="background-color: rgba(21, 15, 36, 0.5) !important;">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-2xl font-bold text-white mb-8">Product Specifications</h2>
+                <div class="flex flex-col md:flex-row justify-center gap-8 md:gap-16">
+                    <div>
+                        <p class="text-slate-400 font-semibold uppercase tracking-wider text-sm">Active Compound</p>
+                        <p class="text-lg font-bold text-white">2mg Metocin (4-HO-MET)</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400 font-semibold uppercase tracking-wider text-sm">Form</p>
+                        <p class="text-lg font-bold text-white">Scored, Non-Chewable Pill</p>
+                    </div>
+                    <div>
+                        <p class="text-slate-400 font-semibold uppercase tracking-wider text-sm">Shipping</p>
+                        <p class="text-lg font-bold text-white">Discreet, within 48 hours</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="py-20  overflow-hidden" style="background-color: rgba(10, 5, 20, 0.7) !important;" style="background-color: #0a0514 !important;">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-white text-center mb-12">Trusted by thousands for focus and clarity</h2>
+                <div class="relative">
+                    <div id="testimonial-carousel" class="testimonial-carousel">
+                        <!-- Testimonials injected by JS -->
+                    </div>
+                    <!-- Fade edges -->
+                    <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-900 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-slate-900 to-transparent pointer-events-none"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="py-20 " style="background-color: rgba(10, 5, 20, 0.5) !important;" style="background-color: #0a0514 !important;">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-16">Get Started in 3 Simple Steps</h2>
+                
+                <div class="relative">
+                    <div class="hidden md:block absolute top-10 left-[16.66%] right-[16.66%] h-0.5 bg-slate-700 z-0" style="background-color: #1a1329 !important;" style="background-color: #1a1329 !important;"></div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center relative z-10">
+                        <div>
+                            <div class="w-20 h-20 mx-auto bg-slate-800 border-4 border-slate-700 rounded-full flex items-center justify-center text-3xl font-bold text-sky-400 mb-6 shadow-inner" style="background-color: #150f24 !important;" style="background-color: #150f24 !important;">1</div>
+                            <h3 class="text-xl font-bold text-white mb-3">Choose Your Plan</h3>
+                            <p class="text-slate-400 leading-relaxed">Start with our risk-free trial or choose your favorite quantity.</p>
+                        </div>
+                        <div>
+                            <div class="w-20 h-20 mx-auto bg-slate-800 border-4 border-slate-700 rounded-full flex items-center justify-center text-3xl font-bold text-sky-400 mb-6 shadow-inner" style="background-color: #150f24 !important;" style="background-color: #150f24 !important;">2</div>
+                            <h3 class="text-xl font-bold text-white mb-3">Fast, Discreet Shipping</h3>
+                            <p class="text-slate-400 leading-relaxed">We ship your order in plain packaging within 48 hours. Your privacy is guaranteed.</p>
+                        </div>
+                        <div>
+                            <div class="w-20 h-20 mx-auto bg-slate-800 border-4 border-slate-700 rounded-full flex items-center justify-center text-3xl font-bold text-sky-400 mb-6 shadow-inner" style="background-color: #150f24 !important;" style="background-color: #150f24 !important;">3</div>
+                            <h3 class="text-xl font-bold text-white mb-3">Experience Clarity</h3>
+                            <p class="text-slate-400 leading-relaxed">Take one pill for one consistent microdose.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-slate-900" style="background-color: #0a0514 !important;" style="background-color: #0a0514 !important;">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-12">Find Your Flow State</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto items-stretch">
+                    
+                    <!-- Trial Pack -->
+                    <div class="pricing-card card-bg rounded-xl p-8 border border-slate-800 flex flex-col shadow-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 py-1.5 px-4 bg-sky-400 text-white text-xs font-bold rounded-bl-lg">GREAT VALUE</div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Trial Pack</h3>
+                        <p class="text-slate-400 mb-6">A low-risk introduction.</p>
+                        <div class="my-4 text-center">
+                            <span class="text-5xl font-extrabold text-white">$12.95</span>
+                            <span class="text-slate-400">/ one-time</span>
+                        </div>
+                        <ul class="space-y-3 text-slate-300 text-left mb-8">
+                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>2 Pills</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>Free Shipping</li>
+                        </ul>
+                        <button data-plan="trial" class="purchase-btn w-full mt-auto btn-primary text-white font-semibold py-4 rounded-lg">Start My Trial</button>
+                    </div>
+
+                    <!-- Dynamic Purchase Card (Protocol & One-Time) -->
+                    <div class="pricing-card card-bg rounded-xl p-8 border border-slate-800 flex flex-col shadow-lg">
+                        
+                        <!-- Toggle Switch -->
+                        <div class="flex justify-center mb-8">
+                            <div class="bg-slate-900 p-1 rounded-full inline-flex relative w-64 border border-slate-700" style="background-color: #0a0514 !important;" style="background-color: #0a0514 !important;">
+                                <div id="toggle-bg" class="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] bg-slate-700 rounded-full transition-transform duration-300 ease-in-out translate-x-0" style="background-color: #1a1329 !important;" style="background-color: #1a1329 !important;"></div>
+                                <button id="btn-protocol" class="relative z-10 w-1/2 py-2 text-sm font-bold text-white transition-colors">The Protocol</button>
+                                <button id="btn-onetime" class="relative z-10 w-1/2 py-2 text-sm font-bold text-slate-400 hover:text-white transition-colors">One-Time</button>
+                            </div>
+                        </div>
+
+                        <!-- Protocol Container -->
+                        <div id="content-protocol" class="flex flex-col flex-grow transition-opacity duration-300">
+                            <h3 class="text-2xl font-bold text-white mb-2">The Protocol <span class="text-xs font-bold text-sky-400 bg-sky-400/10 px-2 py-1 rounded ml-2 align-middle">SAVE 15%</span></h3>
+                            <p class="text-slate-400 mb-6">A guided Monthly Wellness Protocol.</p>
+                            <div class="space-y-4 mt-auto">
+                                <button data-plan="protocol_10" class="purchase-btn w-full text-left  p-4 rounded-lg hover:bg-slate-700 transition-colors border border-sky-500/20 hover:border-sky-500/50" style="background-color: #1a1329 !important;" style="background-color: rgba(26, 19, 41, 0.5) !important;" style="background-color: #1a1329 !important;">
+                                    <p class="font-bold text-white">Explorer Box <span class="text-xs text-slate-400 font-normal ml-1">(10 Pills)</span></p>
+                                    <p><span class="text-2xl font-bold text-white">$47.56</span> <span class="text-slate-400 text-sm">/ mo ($4.76/pill)</span></p>
+                                </button>
+                                <button data-plan="protocol_30" class="purchase-btn w-full text-left  p-4 rounded-lg hover:bg-slate-700 transition-colors border border-sky-500/20 hover:border-sky-500/50 relative overflow-hidden" style="background-color: #1a1329 !important;" style="background-color: rgba(26, 19, 41, 0.5) !important;" style="background-color: #1a1329 !important;">
+                                    <div class="absolute top-0 right-0 bg-sky-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl">RECOMMENDED</div>
+                                    <p class="font-bold text-white">Optimizer Box <span class="text-xs text-slate-400 font-normal ml-1">(30 Pills)</span></p>
+                                    <p><span class="text-2xl font-bold text-white">$128.31</span> <span class="text-slate-400 text-sm">/ mo ($4.28/pill)</span></p>
+                                </button>
+                                <button data-plan="protocol_60" class="purchase-btn w-full text-left  p-4 rounded-lg hover:bg-slate-700 transition-colors border border-sky-500/20 hover:border-sky-500/50" style="background-color: #1a1329 !important;" style="background-color: rgba(26, 19, 41, 0.5) !important;" style="background-color: #1a1329 !important;">
+                                    <p class="font-bold text-white">Master Box <span class="text-xs text-slate-400 font-normal ml-1">(60 Pills)</span></p>
+                                    <p><span class="text-2xl font-bold text-white">$217.56</span> <span class="text-slate-400 text-sm">/ mo ($3.63/pill)</span></p>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- One-Time Container -->
+                        <div id="content-onetime" class="hidden flex-col flex-grow transition-opacity duration-300">
+                            <h3 class="text-2xl font-bold text-white mb-2">One-Time</h3>
+                            <p class="text-slate-400 mb-6">No commitment. Pay as you go.</p>
+                            <div class="space-y-4 mt-auto">
+                                <button data-plan="onetime_10" class="purchase-btn w-full text-left  p-4 rounded-lg hover:bg-slate-700 transition-colors" style="background-color: #1a1329 !important;" style="background-color: rgba(26, 19, 41, 0.5) !important;" style="background-color: #1a1329 !important;">
+                                    <p class="font-bold text-white">10 Pills</p>
+                                    <p><span class="text-2xl font-bold text-white">$55.95</span> <span class="text-slate-400 text-sm">($5.60/pill)</span></p>
+                                </button>
+                                <button data-plan="onetime_30" class="purchase-btn w-full text-left  p-4 rounded-lg hover:bg-slate-700 transition-colors" style="background-color: #1a1329 !important;" style="background-color: rgba(26, 19, 41, 0.5) !important;" style="background-color: #1a1329 !important;">
+                                    <p class="font-bold text-white">30 Pills</p>
+                                    <p><span class="text-2xl font-bold text-white">$150.95</span> <span class="text-slate-400 text-sm">($5.03/pill)</span></p>
+                                </button>
+                                <button data-plan="onetime_60" class="purchase-btn w-full text-left  p-4 rounded-lg hover:bg-slate-700 transition-colors" style="background-color: #1a1329 !important;" style="background-color: rgba(26, 19, 41, 0.5) !important;" style="background-color: #1a1329 !important;">
+                                    <p class="font-bold text-white">60 Pills</p>
+                                    <p><span class="text-2xl font-bold text-white">$255.95</span> <span class="text-slate-400 text-sm">($4.27/pill)</span></p>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Checkout Section -->
+        <section id="checkout" class="py-20  hidden" style="background-color: rgba(10, 5, 20, 0.7) !important;" style="background-color: #0a0514 !important;">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div id="checkout-container" class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-white">Secure Checkout</h2>
+                    </div>
+
+                    <!-- Step Indicator -->
+                    <div class="flex justify-center border-b border-slate-800 mb-12">
+                        <div id="step-1-indicator" class="step-active py-4 px-6 text-sm font-semibold border-b-2">1. Shipping</div>
+                        <div id="step-2-indicator" class="step-inactive py-4 px-6 text-sm font-semibold border-b-2">2. Payment</div>
+                        <div id="step-3-indicator" class="step-inactive py-4 px-6 text-sm font-semibold border-b-2">3. Confirm</div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <!-- Form Section -->
+                        <div class="lg:col-span-1">
+                            <form id="checkout-form" novalidate>
+                                <!-- Step 1: Shipping -->
+                                <div id="step-1">
+                                    <h3 class="text-xl font-bold text-white mb-6">Shipping Details</h3>
+                                    <div class="space-y-4">
+                                        <input type="email" id="email" class="w-full input-field" placeholder="Email Address" required>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <input type="text" id="first-name" class="w-full input-field" placeholder="First Name" required>
+                                            <input type="text" id="last-name" class="w-full input-field" placeholder="Last Name" required>
+                                        </div>
+                                        <input type="text" id="address" class="w-full input-field" placeholder="Street Address" required>
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <input type="text" id="city" class="w-full input-field col-span-1" placeholder="City" required>
+                                            <input type="text" id="state" class="w-full input-field" placeholder="State" required>
+                                            <input type="text" id="zip" class="w-full input-field" placeholder="ZIP" required>
+                                        </div>
+                                    </div>
+                                    <button type="button" id="to-step-2" class="w-full mt-8 btn-primary text-white font-bold py-3 rounded-lg">Continue to Payment</button>
+                                </div>
+
+                                <!-- Step 2: Payment -->
+                                <div id="step-2" class="hidden">
+                                    <h3 class="text-xl font-bold text-white mb-6">Payment Method</h3>
+                                    <div class="space-y-4">
+                                        <input type="text" id="card-number" class="w-full input-field" placeholder="0000 0000 0000 0000" required>
+                                        <input type="text" id="card-name" class="w-full input-field" placeholder="Name on Card" required>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <input type="text" id="expiry-date" class="w-full input-field" placeholder="MM / YY" required>
+                                            <input type="text" id="cvc" class="w-full input-field" placeholder="CVC" required>
+                                        </div>
+                                    </div>
+                                    <div class="mt-8 flex gap-4">
+                                        <button type="button" id="back-to-step-1" class="w-1/3 text-slate-400 hover:text-white">Back</button>
+                                        <button type="button" id="to-step-3" class="w-2/3 btn-primary text-white font-bold py-3 rounded-lg">Review Order</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Step 3: Confirmation -->
+                                <div id="step-3" class="hidden">
+                                    <h3 class="text-xl font-bold text-white mb-6">Confirm Order</h3>
+                                    <div class="card-bg border border-slate-700 rounded-lg p-6 space-y-4 text-slate-300">
+                                        <div id="confirm-summary-text"></div>
+                                        <label class="flex items-center cursor-pointer">
+                                            <input type="checkbox" id="ageVerified" class="mr-3"> I am 21 or older.
+                                        </label>
+                                        <label class="flex items-center cursor-pointer">
+                                            <input type="checkbox" id="legalAccepted" class="mr-3"> I agree to terms.
+                                        </label>
+                                    </div>
+                                    <div class="mt-8 flex gap-4">
+                                        <button type="button" id="back-to-step-2" class="w-1/3 text-slate-400 hover:text-white">Back</button>
+                                        <button type="submit" id="confirm-purchase" class="w-2/3 btn-primary text-white font-bold py-3 rounded-lg flex items-center justify-center">
+                                            <span class="btn-text">Confirm Purchase</span>
+                                            <span class="spinner hidden"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Sidebar Summary -->
+                        <div class="lg:col-span-1">
+                            <div class="card-bg rounded-lg p-6 border border-slate-800 sticky top-28 shadow-xl">
+                                <h3 class="text-lg font-bold text-white mb-4">Your Order</h3>
+                                <div id="order-summary-content" class="text-slate-300"></div>
+                                <div class="border-t border-slate-700 mt-4 pt-4">
+                                    <div class="flex justify-between text-white font-bold text-lg">
+                                        <span>Total</span>
+                                        <span id="summary-total">$0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success -->
+                <div id="success-message" class="hidden text-center card-bg border border-green-500 rounded-lg p-8 max-w-lg mx-auto shadow-2xl">
+                    <div class="w-16 h-16 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-white mb-4">Order Received!</h2>
+                    <p class="text-slate-300 mb-8">Your journey to clarity begins soon. A confirmation email has been sent to your address.</p>
+                    <button id="reset-checkout-btn" class="w-full btn-secondary text-white font-bold py-3 rounded-lg">Back to Store</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="py-20 bg-slate-900" style="background-color: #0a0514 !important;" style="background-color: #0a0514 !important;">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <h2 class="text-3xl font-bold text-white text-center mb-12">Frequently Asked Questions</h2>
+                <div class="space-y-4" id="faq-container">
+                    <div class="card-bg rounded-lg border border-slate-800">
+                        <button class="faq-question flex justify-between items-center w-full p-6 text-left font-semibold text-white" aria-expanded="false" aria-controls="faq1-answer">
+                            <span>Is this legal?</span>
+                            <svg class="faq-arrow w-5 h-5 shrink-0 transition-transform duration-200 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                        <div id="faq1-answer" class="faq-answer hidden p-6 pt-0 text-slate-300 leading-relaxed">Yes. Our active ingredient, 4-HO-MET, is not federally scheduled in the United States. We recommend checking your local regulations, but we ship to all 50 states.</div>
+                    </div>
+                    <div class="card-bg rounded-lg border border-slate-800">
+                        <button class="faq-question flex justify-between items-center w-full p-6 text-left font-semibold text-white" aria-expanded="false" aria-controls="faq2-answer">
+                            <span>What does a microdose feel like?</span>
+                            <svg class="faq-arrow w-5 h-5 shrink-0 transition-transform duration-200 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                        <div id="faq2-answer" class="faq-answer hidden p-6 pt-0 text-slate-300 leading-relaxed">
+                            <p>Effects are subtle and non-intrusive. Users commonly report enhanced focus, increased creativity, a more positive mood, and a feeling of being more present and engaged. It is not a "trip" but a gentle cognitive and emotional lift.</p>
+                        </div>
+                    </div>
+                    <div class="card-bg rounded-lg border border-slate-800">
+                        <button class="faq-question flex justify-between items-center w-full p-6 text-left font-semibold text-white" aria-expanded="false" aria-controls="faq3-answer">
+                            <span>Is it safe?</span>
+                            <svg class="faq-arrow w-5 h-5 shrink-0 transition-transform duration-200 text-slate-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                        </button>
+                        <div id="faq3-answer" class="faq-answer hidden p-6 pt-0 text-slate-300 leading-relaxed">
+                            <p>Yes. Our product is formulated for safety and consistency. We always recommend responsible consumption. Please consult a healthcare professional if you have pre-existing conditions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-900 border-t border-slate-800" style="background-color: #0a0514 !important;" style="background-color: #0a0514 !important;">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-2xl font-bold cursor-pointer" onclick="window.scrollTo(0,0)"><span class="text-[#44f80c]">micro</span><span class="text-[#9a02d0]">DOS</span><span class="text-[#ff66c4]">(2)</span></div>
+                    <p class="max-w-xs text-slate-400 mt-2">Precision psychedelics, simplified for the modern mind.</p>
+                </div>
+                <div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+                        <ul class="space-y-2 text-slate-400">
+                            <li><a href="https://microdos2.github.io/Consumer-Direct-B2C/ARTICLESANDSTUDIES.html" class="hover:text-white">Benefits</a></li>
+                            <li><a href="#pricing" class="hover:text-white">Pricing</a></li>
+                            <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+                            <li><a href="contact.html" class="hover:text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white mb-4">Resources</h4>
+                        <ul class="space-y-2 text-slate-400">
+                            <li><a href="https://microdos2.github.io/Consumer-Direct-B2C/micromicrodosing.html" class="hover:text-white">Micro-dosing Guide</a></li>
+                            <li><a href="https://microdos2.github.io/Consumer-Direct-B2C/UserStoriespage.html" class="hover:text-white">User Experiences</a></li>
+                            <li><a href="https://microdos2.github.io/Consumer-Direct-B2C/Metocin%20Infopage.html" class="hover:text-white">Metocin (4-HO-MET)</a></li>
+                            <li><a href="https://microdos2.github.io/Consumer-Direct-B2C/ARTICLESANDSTUDIES.html" class="hover:text-white">Articles & Studies</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-white mb-4">Legal</h4>
+                        <ul class="space-y-2 text-slate-400">
+                            <li><a href="https://microdos2.github.io/Consumer-Direct-B2C/Legal%20Disclaimer.html" class="hover:text-white">Privacy Policy</a></li>
+                            <li><a href="https://microdos2.github.io/Consumer-Direct-B2C/Legal%20Disclaimer.html" class="hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-slate-700 pt-8 text-center text-slate-500">
+                <p class="text-sm mb-4">
+                    <strong>Important:</strong> Overconsumption may cause intense visuals and hallucinations. This product is intended for adults. Use responsibly. These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease.
+                </p>
+                <p class="text-sm">&copy; 2026 <span class="font-bold"><span class="text-[#44f80c]">micro</span><span class="text-[#9a02d0]">DOS</span><span class="text-[#ff66c4]">(2)</span></span> Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // Mobile Menu Logic
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.onclick = () => {
+            mobileMenu.classList.toggle('hidden');
+        };
+
+        // --- Video Rotator ---
+        function initVideoRotator() {
+            const videoData = [
+                { videoId: 'tVmKLPFWsP4', title: 'One Pill. One Dose. <span class="gradient-text">Pure Clarity.</span>', subtitle: 'Legal, fast-acting psychedelic exploration.' },
+                { videoId: '7IPRnhIub8I', title: 'Unlock Creative Flow. <span class="gradient-text">Elevate Your Senses.</span>', subtitle: 'Tap into a higher state of focus and inspiration.' },
+                { videoId: 'nXwnb-ej8J0', title: 'Expand Your Mind. <span class="gradient-text">Discover New Worlds.</span>', subtitle: 'Journey through vibrant landscapes of thought.' }
+            ];
+
+            let index = 0;
+            const container = document.getElementById('video-container');
+            const title = document.getElementById('hero-title');
+            const sub = document.getElementById('hero-subtitle');
+            const dots = document.getElementById('video-dots');
+
+            videoData.forEach((d, i) => {
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${d.videoId}?autoplay=1&mute=1&loop=1&playlist=${d.videoId}&controls=0&modestbranding=1&rel=0&iv_load_policy=3`;
+                iframe.className = 'video-iframe opacity-0';
+                iframe.setAttribute('frameborder', '0');
+                iframe.setAttribute('allow', 'autoplay; encrypted-media');
+                iframe.setAttribute('allowfullscreen', '');
+                container.appendChild(iframe);
+                d.el = iframe;
+
+                const dot = document.createElement('button');
+                dot.className = 'video-dot';
+                dot.onclick = () => show(i);
+                dots.appendChild(dot);
+            });
+
+            function show(n) {
+                index = n;
+                title.style.opacity = 0;
+                sub.style.opacity = 0;
+                setTimeout(() => {
+                    title.innerHTML = videoData[n].title;
+                    sub.textContent = videoData[n].subtitle;
+                    title.style.opacity = 1;
+                    sub.style.opacity = 1;
+                    videoData.forEach((v, i) => v.el.style.opacity = i === n ? '1' : '0');
+                    Array.from(dots.children).forEach((d, i) => d.classList.toggle('active', i === n));
+                }, 500);
+            }
+
+            show(0);
+            setInterval(() => show((index + 1) % videoData.length), 8000);
+        }
+
+        // --- Reviews Carousel ---
+        function initReviews() {
+            const reviews = [
+                { name: "Sarah M.", text: "This has completely replaced my morning coffee. Clean energy and zero anxiety." },
+                { name: "David K.", text: "The precision dosing is a game-changer. I know exactly what to expect every time." },
+                { name: "Elena R.", text: "Finally, a reliable way to enhance my focus without the stomach issues." },
+                { name: "Marcus T.", text: "Incredible clarity. The 2mg dose is the perfect sweet spot for my creative work." },
+                { name: "Jenny L.", text: "Discreet packaging and fast shipping. The product itself exceeded expectations." },
+                { name: "Sarah K.", text: "I was skeptical, but the trial sold me. It's exactly as described - a subtle lift." },
+                { name: "Mike D.", text: "The product is top-notch. Discreet shipping is a huge plus." },
+                { name: "Jess R.", text: "A perfect tool for deep work sessions. Helps me get into a flow state much faster." }
+            ];
+
+            const carousel = document.getElementById('testimonial-carousel');
+            if (!carousel) return;
+
+            function createCardHTML(r) {
+                return `
+                    <div class="testimonial-card">
+                        <div class="card-bg p-6 rounded-xl border border-slate-800 h-full flex flex-col justify-between shadow-lg">
+                            <div>
+                                <div class="text-sky-400 mb-4 text-xl">★★★★★</div>
+                                <p class="text-slate-300 italic mb-4 leading-relaxed">"${r.text}"</p>
+                            </div>
+                            <p class="text-white font-semibold text-sm">- ${r.name}</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const allReviews = [...reviews, ...reviews];
+            carousel.innerHTML = allReviews.map(createCardHTML).join('');
+        }
+
+        // --- Checkout & Logic ---
+        function initCheckout() {
+            const plans = {
+                trial: { name: 'Trial Pack', price: 12.95 },
+                protocol_10: { name: 'Explorer Box Protocol (10 Pills/mo)', price: 47.56 },
+                protocol_30: { name: 'Optimizer Box Protocol (30 Pills/mo)', price: 128.31 },
+                protocol_60: { name: 'Master Box Protocol (60 Pills/mo)', price: 217.56 },
+                onetime_10: { name: '10 Pills (One-Time)', price: 55.95 },
+                onetime_30: { name: '30 Pills (One-Time)', price: 150.95 },
+                onetime_60: { name: '60 Pills (One-Time)', price: 255.95 }
+            };
+
+            let activePlan = null;
+            let currentStep = 1;
+
+            const cardNumberEl = document.getElementById('card-number');
+            const expiryDateEl = document.getElementById('expiry-date');
+            const cvcEl = document.getElementById('cvc');
+
+            if (cardNumberEl) IMask(cardNumberEl, { mask: '0000 0000 0000 0000' });
+            if (expiryDateEl) IMask(expiryDateEl, { mask: 'MM / YY' });
+            if (cvcEl) IMask(cvcEl, { mask: '0000' });
+
+            document.querySelectorAll('.purchase-btn').forEach(btn => {
+                btn.onclick = (e) => {
+                    activePlan = plans[btn.dataset.plan];
+                    document.getElementById('checkout').classList.remove('hidden');
+                    document.getElementById('order-summary-content').textContent = activePlan.name;
+                    document.getElementById('summary-total').textContent = `$${activePlan.price.toFixed(2)}`;
+                    document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+                };
+            });
+
+            document.getElementById('to-step-2').onclick = () => {
+                const requiredFields = document.getElementById('step-1').querySelectorAll('[required]');
+                let valid = true;
+                requiredFields.forEach(f => {
+                    if(!f.value) {
+                        f.classList.add('border-red-500');
+                        valid = false;
+                    } else {
+                        f.classList.remove('border-red-500');
+                    }
+                });
+
+                if(!valid) return;
+
+                document.getElementById('step-1').classList.add('hidden');
+                document.getElementById('step-2').classList.remove('hidden');
+                currentStep = 2;
+                updateSteps();
+            };
+
+            document.getElementById('to-step-3').onclick = () => {
+                const requiredFields = document.getElementById('step-2').querySelectorAll('[required]');
+                let valid = true;
+                requiredFields.forEach(f => {
+                    if(!f.value) {
+                        f.classList.add('border-red-500');
+                        valid = false;
+                    } else {
+                        f.classList.remove('border-red-500');
+                    }
+                });
+
+                if(!valid) return;
+
+                document.getElementById('step-2').classList.add('hidden');
+                document.getElementById('step-3').classList.remove('hidden');
+                document.getElementById('confirm-summary-text').textContent = `Order: ${activePlan.name} for $${activePlan.price.toFixed(2)}`;
+                currentStep = 3;
+                updateSteps();
+            };
+
+            document.getElementById('back-to-step-1').onclick = () => {
+                document.getElementById('step-2').classList.add('hidden');
+                document.getElementById('step-1').classList.remove('hidden');
+                currentStep = 1;
+                updateSteps();
+            };
+
+            document.getElementById('back-to-step-2').onclick = () => {
+                document.getElementById('step-3').classList.add('hidden');
+                document.getElementById('step-2').classList.remove('hidden');
+                currentStep = 2;
+                updateSteps();
+            };
+
+            function updateSteps() {
+                for(let i=1; i<=3; i++) {
+                    const el = document.getElementById(`step-${i}-indicator`);
+                    el.classList.toggle('step-active', i === currentStep);
+                    el.classList.toggle('step-inactive', i !== currentStep);
+                }
+            }
+
+            document.getElementById('checkout-form').onsubmit = (e) => {
+                e.preventDefault();
+                const btn = document.getElementById('confirm-purchase');
+                btn.disabled = true;
+                btn.querySelector('.spinner').classList.remove('hidden');
+                btn.querySelector('.btn-text').classList.add('hidden');
+
+                setTimeout(() => {
+                    document.getElementById('checkout-container').classList.add('hidden');
+                    document.getElementById('success-message').classList.remove('hidden');
+                }, 1500);
+            };
+
+            document.getElementById('reset-checkout-btn').onclick = () => location.reload();
+        }
+
+        function initFaqAccordion() {
+            const faqContainer = document.getElementById('faq-container');
+            if (!faqContainer) return;
+
+            faqContainer.addEventListener('click', (e) => {
+                const questionButton = e.target.closest('.faq-question');
+                if (!questionButton) return;
+
+                const answer = document.getElementById(questionButton.getAttribute('aria-controls'));
+                const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
+
+                faqContainer.querySelectorAll('.faq-question').forEach(btn => {
+                    if (btn !== questionButton) {
+                        btn.setAttribute('aria-expanded', 'false');
+                        btn.nextElementSibling.classList.add('hidden');
+                        btn.querySelector('.faq-arrow').classList.remove('rotate-180');
+                    }
+                });
+
+                questionButton.setAttribute('aria-expanded', !isExpanded);
+                answer.classList.toggle('hidden');
+                questionButton.querySelector('.faq-arrow').classList.toggle('rotate-180');
+            });
+        }
+
+        function initPricingToggle() {
+            const btnProtocol = document.getElementById('btn-protocol');
+            const btnOneTime = document.getElementById('btn-onetime');
+            const contentProtocol = document.getElementById('content-protocol');
+            const contentOneTime = document.getElementById('content-onetime');
+            const toggleBg = document.getElementById('toggle-bg');
+
+            if (!btnProtocol || !btnOneTime) return;
+
+            btnProtocol.onclick = () => {
+                toggleBg.classList.remove('translate-x-full');
+                toggleBg.classList.add('translate-x-0');
+                
+                btnProtocol.classList.add('text-white');
+                btnProtocol.classList.remove('text-slate-400');
+                btnOneTime.classList.remove('text-white');
+                btnOneTime.classList.add('text-slate-400');
+                
+                contentOneTime.classList.add('hidden');
+                contentOneTime.classList.remove('flex');
+                contentProtocol.classList.remove('hidden');
+                contentProtocol.classList.add('flex');
+            };
+
+            btnOneTime.onclick = () => {
+                toggleBg.classList.remove('translate-x-0');
+                toggleBg.classList.add('translate-x-full');
+                
+                btnOneTime.classList.add('text-white');
+                btnOneTime.classList.remove('text-slate-400');
+                btnProtocol.classList.remove('text-white');
+                btnProtocol.classList.add('text-slate-400');
+                
+                contentProtocol.classList.add('hidden');
+                contentProtocol.classList.remove('flex');
+                contentOneTime.classList.remove('hidden');
+                contentOneTime.classList.add('flex');
+            };
+        }
+
+        initVideoRotator();
+        initReviews(); 
+        initPricingToggle();
+        initCheckout();
+        initFaqAccordion();
+    });
+    </script>
+    
+</body>
+</html>
