@@ -47,15 +47,15 @@
             box-shadow: none;
         }
         .btn-secondary {
-            background-color: #1a1329; /* Slate 700 */
-            border: 1px solid #475569; /* Slate 600 */
+            background-color: #1a1329;
+            border: 1px solid #475569;
             transition: background-color 0.3s ease;
         }
         .btn-secondary:hover {
-            background-color: #475569; /* Slate 600 */
+            background-color: #475569;
         }
         .card-bg {
-            background-color: #150f24; /* Slate 800 */
+            background-color: #150f24;
         }
         .pricing-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -73,26 +73,26 @@
             justify-content: center;
         }
         .input-field {
-            background-color: #150f24; /* Slate 800 */
-            border: 1px solid #1a1329; /* Slate 700 */
-            color: #cbd5e1; /* Slate 300 */
+            background-color: #150f24;
+            border: 1px solid #1a1329;
+            color: #cbd5e1;
             border-radius: 0.5rem;
             padding: 0.75rem 1rem;
             transition: border-color 0.3s ease;
         }
         .input-field:focus {
             outline: none;
-            border-color: #38bdf8; /* Sky 500 */
+            border-color: #38bdf8;
         }
         .input-field.is-invalid {
-            border-color: #f87171; /* Red 400 */
+            border-color: #f87171;
         }
         .step-active {
             color: #7dd3fc;
             border-bottom-color: #7dd3fc;
         }
         .step-inactive {
-            color: #64748b; /* Slate 500 */
+            color: #64748b;
             border-bottom-color: transparent;
         }
         .video-dot {
@@ -100,7 +100,7 @@
             height: 12px;
             width: 12px;
             margin: 0 4px;
-            background-color: #475569; /* Slate 600 */
+            background-color: #475569;
             border-radius: 50%;
             display: inline-block;
             transition: background-color 0.6s ease;
@@ -111,7 +111,7 @@
             border-color: #7dd3fc;
         }
         .video-dot.active, .video-dot:hover {
-            background-color: #7dd3fc; /* Sky 300 */
+            background-color: #7dd3fc;
         }
         .spinner {
             display: inline-block;
@@ -125,7 +125,6 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-        /* Testimonial Carousel */
         .testimonial-carousel {
             display: flex;
             width: max-content;
@@ -149,7 +148,6 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-        /* Video iframe styling */
         .video-iframe {
             width: 100%;
             height: 100%;
@@ -160,23 +158,97 @@
             left: 0;
             transition: opacity 1s ease;
         }
-            .hero-bg {
+        .hero-bg {
             background: radial-gradient(circle at 20% 30%, rgba(107, 33, 168, 0.4) 0%, transparent 40%),
                         radial-gradient(circle at 80% 70%, rgba(68, 248, 12, 0.2) 0%, transparent 40%),
                         #0a0514 !important;
         }
-    
-    @media (max-width: 768px) {
-        .hero-bg h1 { font-size: 2.5rem !important; }
-        .hero-bg p { font-size: 1rem !important; }
-        .flex-col { flex-direction: column !important; }
-        .grid-cols-3 { grid-template-columns: 1fr !important; }
-        .grid-cols-4 { grid-template-columns: 1fr !important; }
-        .px-4 { padding-left: 16px !important; padding-right: 16px !important; }
-    }
-    
-
+        @media (max-width: 768px) {
+            .hero-bg h1 { font-size: 2.5rem !important; }
+            .hero-bg p { font-size: 1rem !important; }
+            .flex-col { flex-direction: column !important; }
+            .grid-cols-3 { grid-template-columns: 1fr !important; }
+            .grid-cols-4 { grid-template-columns: 1fr !important; }
+            .px-4 { padding-left: 16px !important; padding-right: 16px !important; }
+        }
         
+        /* Cart Styles */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            max-width: 100%;
+            height: 100vh;
+            background-color: #0a0514;
+            border-left: 1px solid #1a1329;
+            z-index: 100;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+        .cart-drawer.open {
+            right: 0;
+        }
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .cart-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(to right, #38bdf8, #8b5cf6);
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1a1329;
+            border: 1px solid #475569;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .quantity-btn:hover {
+            background-color: #475569;
+        }
+        .quantity-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            background-color: #150f24;
+            border: 1px solid #1a1329;
+            color: white;
+            border-radius: 4px;
+            padding: 4px;
+        }
         
         .plyr__video-embed iframe {
             pointer-events: none;
@@ -187,19 +259,15 @@
         .plyr__poster {
             background-size: cover;
         }
-        /* Hide YouTube logo and branding */
         .plyr iframe[src*="youtube"] {
             pointer-events: none;
         }
-        /* Hide YouTube player chrome */
         .plyr--video .plyr__controls {
             opacity: 0 !important;
         }
-        /* Force hide all YouTube UI */
         .plyr__video-embed iframe {
             border: none !important;
         }
-        /* Hide YouTube watermark and logo */
         .ytp-watermark,
         .ytp-large-play-button,
         .ytp-youtube-button,
@@ -213,14 +281,54 @@
             opacity: 0 !important;
             visibility: hidden !important;
         }
-
-</style>
-    
+    </style>
 </head>
 <body class="antialiased">
 
+    <!-- Cart Overlay -->
+    <div id="cart-overlay" class="cart-overlay" onclick="closeCart()"></div>
+    
+    <!-- Cart Drawer -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="p-6 border-b border-slate-800 flex justify-between items-center">
+            <h2 class="text-xl font-bold text-white">Your Cart</h2>
+            <button onclick="closeCart()" class="text-slate-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+            </button>
+        </div>
+        <div id="cart-items" class="p-6">
+            <!-- Cart items injected here -->
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-slate-800 bg-[#0a0514]">
+            <div class="space-y-2 mb-4">
+                <div class="flex justify-between text-slate-400">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal">$0.00</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Tax</span>
+                    <span id="cart-tax">$0.00</span>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Shipping</span>
+                    <span class="text-green-400">FREE</span>
+                </div>
+                <div class="flex justify-between text-white font-bold text-lg pt-2 border-t border-slate-700">
+                    <span>Total</span>
+                    <span id="cart-total">$0.00</span>
+                </div>
+            </div>
+            <button id="checkout-btn" onclick="proceedToCheckout()" class="w-full btn-primary text-white font-semibold py-3 rounded-lg" disabled>
+                Proceed to Checkout
+            </button>
+            <button onclick="closeCart()" class="w-full mt-2 text-slate-400 hover:text-white py-2">
+                Continue Shopping
+            </button>
+        </div>
+    </div>
+
     <!-- Header -->
-    <header class="sticky top-0 z-50  backdrop-blur-lg border-b border-slate-800" style="background-color: rgba(10, 5, 20, 0.7) !important;">
+    <header class="sticky top-0 z-50 backdrop-blur-lg border-b border-slate-800" style="background-color: rgba(10, 5, 20, 0.7) !important;">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-bold cursor-pointer" onclick="window.scrollTo(0,0)"><span class="text-[#44f80c]">micro</span><span class="text-[#9a02d0]">DOS</span><span class="text-[#ff66c4]">4U</span></div>
             <div class="hidden md:flex items-center space-x-8">
@@ -230,13 +338,17 @@
                 <a href="#pricing" class="text-slate-300 hover:text-white">Pricing</a>
                 <a href="#faq" class="text-slate-300 hover:text-white">FAQ</a>
                 <a href="contact.html" class="text-slate-300 hover:text-white">Contact</a>
-                <a href="#pricing" class="hidden md:inline-block px-6 py-2 text-white font-semibold rounded-lg shadow-md btn-primary">
-                    Get Started
-                </a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700" style="background-color: #1a1329 !important;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-            </button>
+            <div class="flex items-center gap-4">
+                <!-- Cart Icon -->
+                <button onclick="openCart()" class="relative p-2 text-slate-300 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span id="cart-badge" class="cart-badge hidden">0</span>
+                </button>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-slate-400 hover:text-white hover:bg-slate-700" style="background-color: #1a1329 !important;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
         </nav>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 space-y-2 bg-slate-900 border-b border-slate-800" style="background-color: #0a0514 !important;">
@@ -256,14 +368,10 @@
         <!-- Hero Section -->
         <section class="hero-bg py-20 md:py-28">
             <div class="container mx-auto px-6 text-center">
-                <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white mb-4 transition-opacity duration-500 min-h-[4rem]">
-                    <!-- Updated by JS -->
-                </h1>
-                <p id="hero-subtitle" class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-8 transition-opacity duration-500 min-h-[3rem]">
-                    <!-- Updated by JS -->
-                </p>
+                <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold tracking-tighter text-white mb-4 transition-opacity duration-500 min-h-[4rem]"></h1>
+                <p id="hero-subtitle" class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-8 transition-opacity duration-500 min-h-[3rem]"></p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <a href="#checkout" data-plan="trial" class="purchase-btn w-full sm:w-auto px-8 py-4 text-lg text-white font-bold rounded-lg shadow-lg btn-primary transform hover:scale-105">
+                    <a href="#pricing" class="w-full sm:w-auto px-8 py-4 text-lg text-white font-bold rounded-lg shadow-lg btn-primary transform hover:scale-105">
                         Start Your $12.95 Trial
                     </a>
                     <a href="#how-it-works" class="w-full sm:w-auto px-8 py-4 text-lg font-semibold text-white bg-slate-700 border border-slate-600 rounded-lg shadow-md hover:bg-slate-600 transition-colors" style="background-color: #1f1a2e !important;">
@@ -271,18 +379,14 @@
                     </a>
                 </div>
                 <div class="mt-16 max-w-sm mx-auto aspect-square relative">
-                    <div id="video-container" class="w-full h-full bg-slate-800 rounded-xl overflow-hidden shadow-2xl ring-1 ring-slate-700" style="background-color: #150f24 !important;">
-                        <!-- Videos injected by JS -->
-                    </div>
+                    <div id="video-container" class="w-full h-full bg-slate-800 rounded-xl overflow-hidden shadow-2xl ring-1 ring-slate-700" style="background-color: #150f24 !important;"></div>
                 </div>
-                <div id="video-dots" class="text-center mt-6">
-                    <!-- Dots inserted by JS -->
-                </div>
+                <div id="video-dots" class="text-center mt-6"></div>
             </div>
         </section>
 
         <!-- Benefits Section -->
-        <section id="benefits" class="py-20 " style="background-color: rgba(10, 5, 20, 0.7) !important;">
+        <section id="benefits" class="py-20" style="background-color: rgba(10, 5, 20, 0.7) !important;">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-16">
                     <span class="text-sky-400 font-semibold">THE MICRODOS ADVANTAGE</span>
@@ -291,28 +395,28 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="text-center p-6 card-bg rounded-xl border border-slate-800">
                         <div class="inline-flex feature-icon mb-4">
-                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-2">Rapid Onset</h3>
                         <p class="text-slate-400">Effects begin in ~10 minutes for a predictable, manageable session.</p>
                     </div>
                     <div class="text-center p-6 card-bg rounded-xl border border-slate-800">
                         <div class="inline-flex feature-icon mb-4">
-                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.085a2 2 0 00-1.736.97l-2.714 4.224a2 2 0 00.174 2.573V10h4z"></path></svg>
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.085a2 2 0 00-1.736.97l-2.714 4.224a2 2 0 00.174 2.573V10h4z"></path></svg>
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-2">No Nausea</h3>
                         <p class="text-slate-400">A clean formula designed to avoid the discomfort of traditional mushrooms.</p>
                     </div>
                     <div class="text-center p-6 card-bg rounded-xl border border-slate-800">
                         <div class="inline-flex feature-icon mb-4">
-                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-2">Precision Dose</h3>
                         <p class="text-slate-400">Each 2mg scored pill ensures a consistent, reliable microdose every time.</p>
                     </div>
                     <div class="text-center p-6 card-bg rounded-xl border border-slate-800">
                         <div class="inline-flex feature-icon mb-4">
-                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                            <svg class="w-8 h-8 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                         </div>
                         <h3 class="text-xl font-semibold text-white mb-2">Legal & Safe</h3>
                         <p class="text-slate-400">Not federally scheduled. Shipped discreetly and reliably to your door.</p>
@@ -347,10 +451,7 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-3xl font-bold text-white text-center mb-12">Trusted by thousands for focus and clarity</h2>
                 <div class="relative">
-                    <div id="testimonial-carousel" class="testimonial-carousel">
-                        <!-- Testimonials injected by JS -->
-                    </div>
-                    <!-- Fade edges -->
+                    <div id="testimonial-carousel" class="testimonial-carousel"></div>
                     <div class="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-slate-900 to-transparent pointer-events-none"></div>
                     <div class="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-slate-900 to-transparent pointer-events-none"></div>
                 </div>
@@ -361,10 +462,8 @@
         <section id="how-it-works" class="py-20" style="background-color: rgba(10, 5, 20, 0.5) !important;">
             <div class="container mx-auto px-6 max-w-5xl">
                 <h2 class="text-3xl md:text-4xl font-bold text-white text-center mb-16">Get Started in 3 Simple Steps</h2>
-                
                 <div class="relative">
                     <div class="hidden md:block absolute top-10 left-[16.66%] right-[16.66%] h-0.5 bg-slate-700 z-0" style="background-color: #1a1329 !important;"></div>
-                    
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center relative z-10">
                         <div>
                             <div class="w-20 h-20 mx-auto bg-slate-800 border-4 border-slate-700 rounded-full flex items-center justify-center text-3xl font-bold text-sky-400 mb-6 shadow-inner" style="background-color: #150f24 !important;">1</div>
@@ -405,7 +504,14 @@
                             <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>2 Pills</li>
                             <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>Free Shipping</li>
                         </ul>
-                        <button data-plan="trial" class="purchase-btn w-full mt-auto btn-primary text-white font-semibold py-4 rounded-lg">Start My Trial</button>
+                        <!-- Quantity Selector -->
+                        <div class="flex items-center justify-center gap-3 mb-4">
+                            <span class="text-slate-400 text-sm">Quantity:</span>
+                            <button class="quantity-btn" onclick="adjustQuantity('trial', -1)">-</button>
+                            <input type="number" id="qty-trial" class="quantity-input" value="1" min="1" max="10" readonly>
+                            <button class="quantity-btn" onclick="adjustQuantity('trial', 1)">+</button>
+                        </div>
+                        <button onclick="addToCart('trial')" class="w-full mt-auto btn-primary text-white font-semibold py-4 rounded-lg">Add to Cart</button>
                     </div>
 
                     <!-- Dynamic Purchase Card (Protocol & One-Time) -->
@@ -425,19 +531,40 @@
                             <h3 class="text-2xl font-bold text-white mb-2">The Protocol <span class="text-xs font-bold text-sky-400 bg-sky-400/10 px-2 py-1 rounded ml-2 align-middle">SAVE 15%</span></h3>
                             <p class="text-slate-400 mb-6">A guided Monthly Wellness Protocol.</p>
                             <div class="space-y-4 mt-auto">
-                                <button data-plan="protocol_10" class="purchase-btn w-full text-left p-4 rounded-lg hover:bg-slate-700 transition-colors border border-sky-500/20 hover:border-sky-500/50" style="background-color: #1a1329 !important;">
+                                <!-- Protocol 10 -->
+                                <div class="p-4 rounded-lg border border-sky-500/20" style="background-color: #1a1329 !important;">
                                     <p class="font-bold text-white">Explorer Box <span class="text-xs text-slate-400 font-normal ml-1">(10 Pills)</span></p>
-                                    <p><span class="text-2xl font-bold text-white">$47.56</span> <span class="text-slate-400 text-sm">/ mo ($4.76/pill)</span></p>
-                                </button>
-                                <button data-plan="protocol_30" class="purchase-btn w-full text-left p-4 rounded-lg hover:bg-slate-700 transition-colors border border-sky-500/20 hover:border-sky-500/50 relative overflow-hidden" style="background-color: #1a1329 !important;">
+                                    <p class="mb-3"><span class="text-2xl font-bold text-white">$47.56</span> <span class="text-slate-400 text-sm">/ mo ($4.76/pill)</span></p>
+                                    <div class="flex items-center gap-2">
+                                        <button class="quantity-btn" onclick="adjustQuantity('protocol_10', -1)">-</button>
+                                        <input type="number" id="qty-protocol_10" class="quantity-input" value="1" min="1" max="10" readonly>
+                                        <button class="quantity-btn" onclick="adjustQuantity('protocol_10', 1)">+</button>
+                                        <button onclick="addToCart('protocol_10')" class="ml-auto px-4 py-2 btn-primary text-white text-sm font-semibold rounded-lg">Add</button>
+                                    </div>
+                                </div>
+                                <!-- Protocol 30 -->
+                                <div class="p-4 rounded-lg border border-sky-500/20 relative overflow-hidden" style="background-color: #1a1329 !important;">
                                     <div class="absolute top-0 right-0 bg-sky-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl">RECOMMENDED</div>
                                     <p class="font-bold text-white">Optimizer Box <span class="text-xs text-slate-400 font-normal ml-1">(30 Pills)</span></p>
-                                    <p><span class="text-2xl font-bold text-white">$128.31</span> <span class="text-slate-400 text-sm">/ mo ($4.28/pill)</span></p>
-                                </button>
-                                <button data-plan="protocol_60" class="purchase-btn w-full text-left p-4 rounded-lg hover:bg-slate-700 transition-colors border border-sky-500/20 hover:border-sky-500/50" style="background-color: #1a1329 !important;">
+                                    <p class="mb-3"><span class="text-2xl font-bold text-white">$128.31</span> <span class="text-slate-400 text-sm">/ mo ($4.28/pill)</span></p>
+                                    <div class="flex items-center gap-2">
+                                        <button class="quantity-btn" onclick="adjustQuantity('protocol_30', -1)">-</button>
+                                        <input type="number" id="qty-protocol_30" class="quantity-input" value="1" min="1" max="10" readonly>
+                                        <button class="quantity-btn" onclick="adjustQuantity('protocol_30', 1)">+</button>
+                                        <button onclick="addToCart('protocol_30')" class="ml-auto px-4 py-2 btn-primary text-white text-sm font-semibold rounded-lg">Add</button>
+                                    </div>
+                                </div>
+                                <!-- Protocol 60 -->
+                                <div class="p-4 rounded-lg border border-sky-500/20" style="background-color: #1a1329 !important;">
                                     <p class="font-bold text-white">Master Box <span class="text-xs text-slate-400 font-normal ml-1">(60 Pills)</span></p>
-                                    <p><span class="text-2xl font-bold text-white">$217.56</span> <span class="text-slate-400 text-sm">/ mo ($3.63/pill)</span></p>
-                                </button>
+                                    <p class="mb-3"><span class="text-2xl font-bold text-white">$217.56</span> <span class="text-slate-400 text-sm">/ mo ($3.63/pill)</span></p>
+                                    <div class="flex items-center gap-2">
+                                        <button class="quantity-btn" onclick="adjustQuantity('protocol_60', -1)">-</button>
+                                        <input type="number" id="qty-protocol_60" class="quantity-input" value="1" min="1" max="10" readonly>
+                                        <button class="quantity-btn" onclick="adjustQuantity('protocol_60', 1)">+</button>
+                                        <button onclick="addToCart('protocol_60')" class="ml-auto px-4 py-2 btn-primary text-white text-sm font-semibold rounded-lg">Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -446,21 +573,41 @@
                             <h3 class="text-2xl font-bold text-white mb-2">One-Time</h3>
                             <p class="text-slate-400 mb-6">No commitment. Pay as you go.</p>
                             <div class="space-y-4 mt-auto">
-                                <button data-plan="onetime_10" class="purchase-btn w-full text-left p-4 rounded-lg hover:bg-slate-700 transition-colors" style="background-color: #1a1329 !important;">
+                                <!-- One-Time 10 -->
+                                <div class="p-4 rounded-lg" style="background-color: #1a1329 !important;">
                                     <p class="font-bold text-white">10 Pills</p>
-                                    <p><span class="text-2xl font-bold text-white">$55.95</span> <span class="text-slate-400 text-sm">($5.60/pill)</span></p>
-                                </button>
-                                <button data-plan="onetime_30" class="purchase-btn w-full text-left p-4 rounded-lg hover:bg-slate-700 transition-colors" style="background-color: #1a1329 !important;">
+                                    <p class="mb-3"><span class="text-2xl font-bold text-white">$55.95</span> <span class="text-slate-400 text-sm">($5.60/pill)</span></p>
+                                    <div class="flex items-center gap-2">
+                                        <button class="quantity-btn" onclick="adjustQuantity('onetime_10', -1)">-</button>
+                                        <input type="number" id="qty-onetime_10" class="quantity-input" value="1" min="1" max="10" readonly>
+                                        <button class="quantity-btn" onclick="adjustQuantity('onetime_10', 1)">+</button>
+                                        <button onclick="addToCart('onetime_10')" class="ml-auto px-4 py-2 btn-primary text-white text-sm font-semibold rounded-lg">Add</button>
+                                    </div>
+                                </div>
+                                <!-- One-Time 30 -->
+                                <div class="p-4 rounded-lg" style="background-color: #1a1329 !important;">
                                     <p class="font-bold text-white">30 Pills</p>
-                                    <p><span class="text-2xl font-bold text-white">$150.95</span> <span class="text-slate-400 text-sm">($5.03/pill)</span></p>
-                                </button>
-                                <button data-plan="onetime_60" class="purchase-btn w-full text-left p-4 rounded-lg hover:bg-slate-700 transition-colors" style="background-color: #1a1329 !important;">
+                                    <p class="mb-3"><span class="text-2xl font-bold text-white">$150.95</span> <span class="text-slate-400 text-sm">($5.03/pill)</span></p>
+                                    <div class="flex items-center gap-2">
+                                        <button class="quantity-btn" onclick="adjustQuantity('onetime_30', -1)">-</button>
+                                        <input type="number" id="qty-onetime_30" class="quantity-input" value="1" min="1" max="10" readonly>
+                                        <button class="quantity-btn" onclick="adjustQuantity('onetime_30', 1)">+</button>
+                                        <button onclick="addToCart('onetime_30')" class="ml-auto px-4 py-2 btn-primary text-white text-sm font-semibold rounded-lg">Add</button>
+                                    </div>
+                                </div>
+                                <!-- One-Time 60 -->
+                                <div class="p-4 rounded-lg" style="background-color: #1a1329 !important;">
                                     <p class="font-bold text-white">60 Pills</p>
-                                    <p><span class="text-2xl font-bold text-white">$255.95</span> <span class="text-slate-400 text-sm">($4.27/pill)</span></p>
-                                </button>
+                                    <p class="mb-3"><span class="text-2xl font-bold text-white">$255.95</span> <span class="text-slate-400 text-sm">($4.27/pill)</span></p>
+                                    <div class="flex items-center gap-2">
+                                        <button class="quantity-btn" onclick="adjustQuantity('onetime_60', -1)">-</button>
+                                        <input type="number" id="qty-onetime_60" class="quantity-input" value="1" min="1" max="10" readonly>
+                                        <button class="quantity-btn" onclick="adjustQuantity('onetime_60', 1)">+</button>
+                                        <button onclick="addToCart('onetime_60')" class="ml-auto px-4 py-2 btn-primary text-white text-sm font-semibold rounded-lg">Add</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -497,8 +644,61 @@
                                         <input type="text" id="address" class="w-full input-field" placeholder="Street Address" required>
                                         <div class="grid grid-cols-3 gap-4">
                                             <input type="text" id="city" class="w-full input-field col-span-1" placeholder="City" required>
-                                            <input type="text" id="state" class="w-full input-field" placeholder="State" required>
-                                            <input type="text" id="zip" class="w-full input-field" placeholder="ZIP" required>
+                                            <select id="state" class="w-full input-field" required>
+                                                <option value="">State</option>
+                                                <option value="AL">Alabama</option>
+                                                <option value="AK">Alaska</option>
+                                                <option value="AZ">Arizona</option>
+                                                <option value="AR">Arkansas</option>
+                                                <option value="CA">California</option>
+                                                <option value="CO">Colorado</option>
+                                                <option value="CT">Connecticut</option>
+                                                <option value="DE">Delaware</option>
+                                                <option value="FL">Florida</option>
+                                                <option value="GA">Georgia</option>
+                                                <option value="HI">Hawaii</option>
+                                                <option value="ID">Idaho</option>
+                                                <option value="IL">Illinois</option>
+                                                <option value="IN">Indiana</option>
+                                                <option value="IA">Iowa</option>
+                                                <option value="KS">Kansas</option>
+                                                <option value="KY">Kentucky</option>
+                                                <option value="LA">Louisiana</option>
+                                                <option value="ME">Maine</option>
+                                                <option value="MD">Maryland</option>
+                                                <option value="MA">Massachusetts</option>
+                                                <option value="MI">Michigan</option>
+                                                <option value="MN">Minnesota</option>
+                                                <option value="MS">Mississippi</option>
+                                                <option value="MO">Missouri</option>
+                                                <option value="MT">Montana</option>
+                                                <option value="NE">Nebraska</option>
+                                                <option value="NV">Nevada</option>
+                                                <option value="NH">New Hampshire</option>
+                                                <option value="NJ">New Jersey</option>
+                                                <option value="NM">New Mexico</option>
+                                                <option value="NY">New York</option>
+                                                <option value="NC">North Carolina</option>
+                                                <option value="ND">North Dakota</option>
+                                                <option value="OH">Ohio</option>
+                                                <option value="OK">Oklahoma</option>
+                                                <option value="OR">Oregon</option>
+                                                <option value="PA">Pennsylvania</option>
+                                                <option value="RI">Rhode Island</option>
+                                                <option value="SC">South Carolina</option>
+                                                <option value="SD">South Dakota</option>
+                                                <option value="TN">Tennessee</option>
+                                                <option value="TX">Texas</option>
+                                                <option value="UT">Utah</option>
+                                                <option value="VT">Vermont</option>
+                                                <option value="VA">Virginia</option>
+                                                <option value="WA">Washington</option>
+                                                <option value="WV">West Virginia</option>
+                                                <option value="WI">Wisconsin</option>
+                                                <option value="WY">Wyoming</option>
+                                                <option value="DC">Washington DC</option>
+                                            </select>
+                                            <input type="text" id="zip" class="w-full input-field" placeholder="ZIP" required maxlength="5">
                                         </div>
                                     </div>
                                     <button type="button" id="to-step-2" class="w-full mt-8 btn-primary text-white font-bold py-3 rounded-lg">Continue to Payment</button>
@@ -515,6 +715,80 @@
                                             <input type="text" id="cvc" class="w-full input-field" placeholder="CVC" required>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Billing Address Toggle -->
+                                    <div class="mt-6">
+                                        <label class="flex items-center cursor-pointer">
+                                            <input type="checkbox" id="same-billing" class="mr-3" checked onchange="toggleBillingAddress()">
+                                            <span class="text-slate-300">Billing address is the same as shipping address</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <!-- Billing Address Section (hidden by default) -->
+                                    <div id="billing-address-section" class="hidden mt-6 space-y-4">
+                                        <h4 class="text-lg font-semibold text-white">Billing Address</h4>
+                                        <input type="text" id="billing-name" class="w-full input-field" placeholder="Cardholder Name">
+                                        <input type="text" id="billing-address" class="w-full input-field" placeholder="Street Address">
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <input type="text" id="billing-city" class="w-full input-field" placeholder="City">
+                                            <select id="billing-state" class="w-full input-field">
+                                                <option value="">State</option>
+                                                <option value="AL">Alabama</option>
+                                                <option value="AK">Alaska</option>
+                                                <option value="AZ">Arizona</option>
+                                                <option value="AR">Arkansas</option>
+                                                <option value="CA">California</option>
+                                                <option value="CO">Colorado</option>
+                                                <option value="CT">Connecticut</option>
+                                                <option value="DE">Delaware</option>
+                                                <option value="FL">Florida</option>
+                                                <option value="GA">Georgia</option>
+                                                <option value="HI">Hawaii</option>
+                                                <option value="ID">Idaho</option>
+                                                <option value="IL">Illinois</option>
+                                                <option value="IN">Indiana</option>
+                                                <option value="IA">Iowa</option>
+                                                <option value="KS">Kansas</option>
+                                                <option value="KY">Kentucky</option>
+                                                <option value="LA">Louisiana</option>
+                                                <option value="ME">Maine</option>
+                                                <option value="MD">Maryland</option>
+                                                <option value="MA">Massachusetts</option>
+                                                <option value="MI">Michigan</option>
+                                                <option value="MN">Minnesota</option>
+                                                <option value="MS">Mississippi</option>
+                                                <option value="MO">Missouri</option>
+                                                <option value="MT">Montana</option>
+                                                <option value="NE">Nebraska</option>
+                                                <option value="NV">Nevada</option>
+                                                <option value="NH">New Hampshire</option>
+                                                <option value="NJ">New Jersey</option>
+                                                <option value="NM">New Mexico</option>
+                                                <option value="NY">New York</option>
+                                                <option value="NC">North Carolina</option>
+                                                <option value="ND">North Dakota</option>
+                                                <option value="OH">Ohio</option>
+                                                <option value="OK">Oklahoma</option>
+                                                <option value="OR">Oregon</option>
+                                                <option value="PA">Pennsylvania</option>
+                                                <option value="RI">Rhode Island</option>
+                                                <option value="SC">South Carolina</option>
+                                                <option value="SD">South Dakota</option>
+                                                <option value="TN">Tennessee</option>
+                                                <option value="TX">Texas</option>
+                                                <option value="UT">Utah</option>
+                                                <option value="VT">Vermont</option>
+                                                <option value="VA">Virginia</option>
+                                                <option value="WA">Washington</option>
+                                                <option value="WV">West Virginia</option>
+                                                <option value="WI">Wisconsin</option>
+                                                <option value="WY">Wyoming</option>
+                                                <option value="DC">Washington DC</option>
+                                            </select>
+                                            <input type="text" id="billing-zip" class="w-full input-field" placeholder="ZIP" maxlength="5">
+                                        </div>
+                                    </div>
+                                    
                                     <div class="mt-8 flex gap-4">
                                         <button type="button" id="back-to-step-1" class="w-1/3 text-slate-400 hover:text-white">Back</button>
                                         <button type="button" id="to-step-3" class="w-2/3 btn-primary text-white font-bold py-3 rounded-lg">Review Order</button>
@@ -526,6 +800,8 @@
                                     <h3 class="text-xl font-bold text-white mb-6">Confirm Order</h3>
                                     <div class="card-bg border border-slate-700 rounded-lg p-6 space-y-4 text-slate-300">
                                         <div id="confirm-summary-text"></div>
+                                        <div id="confirm-shipping-address" class="text-sm border-t border-slate-700 pt-4 mt-4"></div>
+                                        <div id="confirm-billing-address" class="text-sm border-t border-slate-700 pt-4 hidden"></div>
                                         <label class="flex items-center cursor-pointer">
                                             <input type="checkbox" id="ageVerified" class="mr-3"> I am 21 or older.
                                         </label>
@@ -548,9 +824,21 @@
                         <div class="lg:col-span-1">
                             <div class="card-bg rounded-lg p-6 border border-slate-800 sticky top-28 shadow-xl">
                                 <h3 class="text-lg font-bold text-white mb-4">Your Order</h3>
-                                <div id="order-summary-content" class="text-slate-300"></div>
-                                <div class="border-t border-slate-700 mt-4 pt-4">
-                                    <div class="flex justify-between text-white font-bold text-lg">
+                                <div id="order-summary-content" class="text-slate-300 space-y-2"></div>
+                                <div class="border-t border-slate-700 mt-4 pt-4 space-y-2">
+                                    <div class="flex justify-between text-slate-400">
+                                        <span>Subtotal</span>
+                                        <span id="summary-subtotal">$0.00</span>
+                                    </div>
+                                    <div class="flex justify-between text-slate-400">
+                                        <span>Tax</span>
+                                        <span id="summary-tax">$0.00</span>
+                                    </div>
+                                    <div class="flex justify-between text-slate-400">
+                                        <span>Shipping</span>
+                                        <span class="text-green-400">FREE</span>
+                                    </div>
+                                    <div class="flex justify-between text-white font-bold text-lg pt-2 border-t border-slate-700">
                                         <span>Total</span>
                                         <span id="summary-total">$0.00</span>
                                     </div>
@@ -652,288 +940,584 @@
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    // Product Data
+    const products = {
+        trial: { name: 'Trial Pack', price: 12.95 },
+        protocol_10: { name: 'Explorer Box Protocol (10 Pills/mo)', price: 47.56 },
+        protocol_30: { name: 'Optimizer Box Protocol (30 Pills/mo)', price: 128.31 },
+        protocol_60: { name: 'Master Box Protocol (60 Pills/mo)', price: 217.56 },
+        onetime_10: { name: '10 Pills (One-Time)', price: 55.95 },
+        onetime_30: { name: '30 Pills (One-Time)', price: 150.95 },
+        onetime_60: { name: '60 Pills (One-Time)', price: 255.95 }
+    };
+
+    // US State Tax Rates (simplified - using average rates)
+    const stateTaxRates = {
+        'AL': 0.09, 'AK': 0.00, 'AZ': 0.084, 'AR': 0.095,
+        'CA': 0.083, 'CO': 0.079, 'CT': 0.064, 'DE': 0.00,
+        'FL': 0.07, 'GA': 0.074, 'HI': 0.044, 'ID': 0.06,
+        'IL': 0.088, 'IN': 0.07, 'IA': 0.068, 'KS': 0.086,
+        'KY': 0.06, 'LA': 0.10, 'ME': 0.055, 'MD': 0.06,
+        'MA': 0.0625, 'MI': 0.06, 'MN': 0.074, 'MS': 0.07,
+        'MO': 0.084, 'MT': 0.00, 'NE': 0.068, 'NV': 0.082,
+        'NH': 0.00, 'NJ': 0.066, 'NM': 0.078, 'NY': 0.084,
+        'NC': 0.07, 'ND': 0.068, 'OH': 0.072, 'OK': 0.089,
+        'OR': 0.00, 'PA': 0.063, 'RI': 0.07, 'SC': 0.072,
+        'SD': 0.06, 'TN': 0.10, 'TX': 0.082, 'UT': 0.071,
+        'VT': 0.06, 'VA': 0.057, 'WA': 0.088, 'WV': 0.06,
+        'WI': 0.054, 'WY': 0.054, 'DC': 0.06
+    };
+
+    // Cart State
+    let cart = [];
+
+    // Load cart from localStorage
+    function loadCart() {
+        const saved = localStorage.getItem('microdos4u_cart');
+        if (saved) {
+            cart = JSON.parse(saved);
+            updateCartUI();
+        }
+    }
+
+    // Save cart to localStorage
+    function saveCart() {
+        localStorage.setItem('microdos4u_cart', JSON.stringify(cart));
+        updateCartUI();
+    }
+
+    // Update Cart UI
+    function updateCartUI() {
+        const badge = document.getElementById('cart-badge');
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         
-        // Mobile Menu Logic
+        if (totalItems > 0) {
+            badge.textContent = totalItems;
+            badge.classList.remove('hidden');
+        } else {
+            badge.classList.add('hidden');
+        }
+        
+        renderCartItems();
+        updateCartTotals();
+    }
+
+    // Render Cart Items
+    function renderCartItems() {
+        const container = document.getElementById('cart-items');
+        
+        if (cart.length === 0) {
+            container.innerHTML = `
+                <div class="text-center text-slate-400 py-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-4 opacity-50"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <p>Your cart is empty</p>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = cart.map((item, index) => `
+            <div class="flex justify-between items-start mb-4 pb-4 border-b border-slate-800">
+                <div class="flex-1">
+                    <h4 class="text-white font-semibold">${item.name}</h4>
+                    <p class="text-slate-400 text-sm">$${item.price.toFixed(2)} each</p>
+                    <div class="flex items-center gap-2 mt-2">
+                        <button class="quantity-btn" onclick="updateCartQuantity(${index}, -1)">-</button>
+                        <span class="text-white w-8 text-center">${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateCartQuantity(${index}, 1)">+</button>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-white font-semibold">$${(item.price * item.quantity).toFixed(2)}</p>
+                    <button onclick="removeFromCart(${index})" class="text-red-400 text-sm hover:text-red-300 mt-2">Remove</button>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Update Cart Quantity
+    function updateCartQuantity(index, change) {
+        const item = cart[index];
+        const newQty = item.quantity + change;
+        
+        if (newQty < 1) {
+            removeFromCart(index);
+        } else if (newQty <= 10) {
+            item.quantity = newQty;
+            saveCart();
+        }
+    }
+
+    // Remove from Cart
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        saveCart();
+    }
+
+    // Update Cart Totals
+    function updateCartTotals() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const shippingState = document.getElementById('state')?.value;
+        const taxRate = shippingState ? (stateTaxRates[shippingState] || 0) : 0;
+        const tax = Math.round(subtotal * taxRate * 100) / 100;
+        const total = subtotal + tax;
+        
+        document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('cart-tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+        
+        const checkoutBtn = document.getElementById('checkout-btn');
+        if (checkoutBtn) {
+            checkoutBtn.disabled = cart.length === 0;
+        }
+    }
+
+    // Adjust Quantity on Pricing Page
+    function adjustQuantity(planId, change) {
+        const input = document.getElementById(`qty-${planId}`);
+        let value = parseInt(input.value) + change;
+        value = Math.max(1, Math.min(10, value));
+        input.value = value;
+    }
+
+    // Add to Cart
+    function addToCart(planId) {
+        const quantity = parseInt(document.getElementById(`qty-${planId}`).value);
+        const product = products[planId];
+        
+        const existingItem = cart.find(item => item.id === planId);
+        
+        if (existingItem) {
+            const newQty = existingItem.quantity + quantity;
+            if (newQty <= 10) {
+                existingItem.quantity = newQty;
+            } else {
+                alert('Maximum quantity per item is 10');
+                return;
+            }
+        } else {
+            cart.push({
+                id: planId,
+                name: product.name,
+                price: product.price,
+                quantity: quantity
+            });
+        }
+        
+        saveCart();
+        
+        // Show toast notification
+        showToast(`${product.name} added to cart!`);
+    }
+
+    // Show Toast
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    // Open/Close Cart
+    function openCart() {
+        document.getElementById('cart-drawer').classList.add('open');
+        document.getElementById('cart-overlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+        updateCartTotals();
+    }
+
+    function closeCart() {
+        document.getElementById('cart-drawer').classList.remove('open');
+        document.getElementById('cart-overlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Proceed to Checkout
+    function proceedToCheckout() {
+        closeCart();
+        document.getElementById('checkout').classList.remove('hidden');
+        updateCheckoutSummary();
+        document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Update Checkout Summary
+    function updateCheckoutSummary() {
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const shippingState = document.getElementById('state')?.value;
+        const taxRate = shippingState ? (stateTaxRates[shippingState] || 0) : 0;
+        const tax = Math.round(subtotal * taxRate * 100) / 100;
+        const total = subtotal + tax;
+        
+        // Update order summary
+        const summaryContent = document.getElementById('order-summary-content');
+        summaryContent.innerHTML = cart.map(item => `
+            <div class="flex justify-between">
+                <span>${item.name} × ${item.quantity}</span>
+                <span>$${(item.price * item.quantity).toFixed(2)}</span>
+            </div>
+        `).join('');
+        
+        document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById('summary-tax').textContent = `$${tax.toFixed(2)}`;
+        document.getElementById('summary-total').textContent = `$${total.toFixed(2)}`;
+    }
+
+    // Toggle Billing Address
+    function toggleBillingAddress() {
+        const checkbox = document.getElementById('same-billing');
+        const section = document.getElementById('billing-address-section');
+        const inputs = section.querySelectorAll('input, select');
+        
+        if (checkbox.checked) {
+            section.classList.add('hidden');
+            inputs.forEach(input => input.removeAttribute('required'));
+        } else {
+            section.classList.remove('hidden');
+            inputs.forEach(input => input.setAttribute('required', 'required'));
+        }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function () {
+        loadCart();
+        
+        // Mobile Menu
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.onclick = () => mobileMenu.classList.toggle('hidden');
+
+        // Video Rotator
+        initVideoRotator();
         
-        mobileMenuButton.onclick = () => {
-            mobileMenu.classList.toggle('hidden');
+        // Reviews
+        initReviews();
+        
+        // Pricing Toggle
+        initPricingToggle();
+        
+        // Checkout
+        initCheckout();
+        
+        // FAQ
+        initFaqAccordion();
+        
+        // Update tax when state changes
+        document.getElementById('state')?.addEventListener('change', updateCheckoutSummary);
+    });
+
+    function initVideoRotator() {
+        const videoData = [
+            { videoId: 'N8rr4CvoGpw', title: 'One Pill. One Dose. <span class="gradient-text">Pure Clarity.</span>', subtitle: 'Legal, fast-acting psychedelic exploration.' },
+            { videoId: '1iNzfVKw_tc', title: 'Unlock Creative Flow. <span class="gradient-text">Elevate Your Senses.</span>', subtitle: 'Tap into a higher state of focus and inspiration.' },
+            { videoId: 'ewNVcCUkm38', title: 'Expand Your Mind. <span class="gradient-text">Discover New Worlds.</span>', subtitle: 'Journey through vibrant landscapes of thought.' },
+            { videoId: 'qntHKcw93iE', title: 'One Pill. One Dose. <span class="gradient-text">Pure Clarity.</span>', subtitle: 'Legal, fast-acting psychedelic exploration.' },
+            { videoId: 'npMeiYK6XXo', title: 'Unlock Creative Flow. <span class="gradient-text">Elevate Your Senses.</span>', subtitle: 'Tap into a higher state of focus and inspiration.' },
+            { videoId: 'Qqpm0XbGdOA', title: 'Expand Your Mind. <span class="gradient-text">Discover New Worlds.</span>', subtitle: 'Journey through vibrant landscapes of thought.' }
+        ];
+
+        let index = 0;
+        const container = document.getElementById('video-container');
+        const title = document.getElementById('hero-title');
+        const sub = document.getElementById('hero-subtitle');
+        const dots = document.getElementById('video-dots');
+
+        videoData.forEach((d, i) => {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${d.videoId}?autoplay=1&mute=1&loop=1&playlist=${d.videoId}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&start=0`;
+            iframe.className = 'video-iframe opacity-0';
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.setAttribute('playsinline', '');
+            iframe.setAttribute('loading', i === 0 ? 'eager' : 'lazy');
+            container.appendChild(iframe);
+            d.el = iframe;
+
+            const dot = document.createElement('button');
+            dot.className = 'video-dot';
+            dot.onclick = () => show(i);
+            dots.appendChild(dot);
+        });
+
+        function show(n) {
+            index = n;
+            title.style.opacity = 0;
+            sub.style.opacity = 0;
+            setTimeout(() => {
+                title.innerHTML = videoData[n].title;
+                sub.textContent = videoData[n].subtitle;
+                title.style.opacity = 1;
+                sub.style.opacity = 1;
+                videoData.forEach((v, i) => v.el.style.opacity = i === n ? '1' : '0');
+                Array.from(dots.children).forEach((d, i) => d.classList.toggle('active', i === n));
+            }, 500);
+        }
+
+        setTimeout(() => show(0), 500);
+        setInterval(() => show((index + 1) % videoData.length), 8000);
+    }
+
+    function initReviews() {
+        const reviews = [
+            { name: "Sarah M.", text: "This has completely replaced my morning coffee. Clean energy and zero anxiety." },
+            { name: "David K.", text: "The precision dosing is a game-changer. I know exactly what to expect every time." },
+            { name: "Elena R.", text: "Finally, a reliable way to enhance my focus without the stomach issues." },
+            { name: "Marcus T.", text: "Incredible clarity. The 2mg dose is the perfect sweet spot for my creative work." },
+            { name: "Jenny L.", text: "Discreet packaging and fast shipping. The product itself exceeded expectations." },
+            { name: "Sarah K.", text: "I was skeptical, but the trial sold me. It's exactly as described - a subtle lift." },
+            { name: "Mike D.", text: "The product is top-notch. Discreet shipping is a huge plus." },
+            { name: "Jess R.", text: "A perfect tool for deep work sessions. Helps me get into a flow state much faster." }
+        ];
+
+        const carousel = document.getElementById('testimonial-carousel');
+        if (!carousel) return;
+
+        function createCardHTML(r) {
+            return `
+                <div class="testimonial-card">
+                    <div class="card-bg p-6 rounded-xl border border-slate-800 h-full flex flex-col justify-between shadow-lg">
+                        <div>
+                            <div class="text-sky-400 mb-4 text-xl">★★★★★</div>
+                            <p class="text-slate-300 italic mb-4 leading-relaxed">"${r.text}"</p>
+                        </div>
+                        <p class="text-white font-semibold text-sm">- ${r.name}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        const allReviews = [...reviews, ...reviews];
+        carousel.innerHTML = allReviews.map(createCardHTML).join('');
+    }
+
+    function initPricingToggle() {
+        const btnProtocol = document.getElementById('btn-protocol');
+        const btnOneTime = document.getElementById('btn-onetime');
+        const contentProtocol = document.getElementById('content-protocol');
+        const contentOneTime = document.getElementById('content-onetime');
+        const toggleBg = document.getElementById('toggle-bg');
+
+        if (!btnProtocol || !btnOneTime) return;
+
+        btnProtocol.onclick = () => {
+            toggleBg.classList.remove('translate-x-full');
+            toggleBg.classList.add('translate-x-0');
+            btnProtocol.classList.add('text-white');
+            btnProtocol.classList.remove('text-slate-400');
+            btnOneTime.classList.remove('text-white');
+            btnOneTime.classList.add('text-slate-400');
+            contentOneTime.classList.add('hidden');
+            contentOneTime.classList.remove('flex');
+            contentProtocol.classList.remove('hidden');
+            contentProtocol.classList.add('flex');
         };
 
-        // --- Video Rotator ---
-        function initVideoRotator() {
-            const videoData = [
-                { videoId: 'N8rr4CvoGpw', title: 'One Pill. One Dose. <span class="gradient-text">Pure Clarity.</span>', subtitle: 'Legal, fast-acting psychedelic exploration.' },
-                { videoId: '1iNzfVKw_tc', title: 'Unlock Creative Flow. <span class="gradient-text">Elevate Your Senses.</span>', subtitle: 'Tap into a higher state of focus and inspiration.' },
-                { videoId: 'ewNVcCUkm38', title: 'Expand Your Mind. <span class="gradient-text">Discover New Worlds.</span>', subtitle: 'Journey through vibrant landscapes of thought.' },
-                { videoId: 'qntHKcw93iE', title: 'One Pill. One Dose. <span class="gradient-text">Pure Clarity.</span>', subtitle: 'Legal, fast-acting psychedelic exploration.' },
-                { videoId: 'npMeiYK6XXo', title: 'Unlock Creative Flow. <span class="gradient-text">Elevate Your Senses.</span>', subtitle: 'Tap into a higher state of focus and inspiration.' },
-                { videoId: 'Qqpm0XbGdOA', title: 'Expand Your Mind. <span class="gradient-text">Discover New Worlds.</span>', subtitle: 'Journey through vibrant landscapes of thought.' }
-            ];
+        btnOneTime.onclick = () => {
+            toggleBg.classList.remove('translate-x-0');
+            toggleBg.classList.add('translate-x-full');
+            btnOneTime.classList.add('text-white');
+            btnOneTime.classList.remove('text-slate-400');
+            btnProtocol.classList.remove('text-white');
+            btnProtocol.classList.add('text-slate-400');
+            contentProtocol.classList.add('hidden');
+            contentProtocol.classList.remove('flex');
+            contentOneTime.classList.remove('hidden');
+            contentOneTime.classList.add('flex');
+        };
+    }
 
-            let index = 0;
-            const container = document.getElementById('video-container');
-            const title = document.getElementById('hero-title');
-            const sub = document.getElementById('hero-subtitle');
-            const dots = document.getElementById('video-dots');
+    function initCheckout() {
+        let currentStep = 1;
 
-            videoData.forEach((d, i) => {
-                const iframe = document.createElement('iframe');
-                iframe.src = `https://www.youtube.com/embed/${d.videoId}?autoplay=1&mute=1&loop=1&playlist=${d.videoId}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&start=0`;
-                iframe.className = 'video-iframe opacity-0';
-                iframe.setAttribute('frameborder', '0');
-                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
-                iframe.setAttribute('allowfullscreen', '');
-                iframe.setAttribute('playsinline', '');
-                iframe.setAttribute('loading', i === 0 ? 'eager' : 'lazy');
-                container.appendChild(iframe);
-                d.el = iframe;
+        const cardNumberEl = document.getElementById('card-number');
+        const expiryDateEl = document.getElementById('expiry-date');
+        const cvcEl = document.getElementById('cvc');
 
-                const dot = document.createElement('button');
-                dot.className = 'video-dot';
-                dot.onclick = () => show(i);
-                dots.appendChild(dot);
+        if (cardNumberEl) IMask(cardNumberEl, { mask: '0000 0000 0000 0000' });
+        if (expiryDateEl) IMask(expiryDateEl, { mask: 'MM / YY' });
+        if (cvcEl) IMask(cvcEl, { mask: '0000' });
+
+        document.getElementById('to-step-2').onclick = () => {
+            const requiredFields = document.getElementById('step-1').querySelectorAll('[required]');
+            let valid = true;
+            requiredFields.forEach(f => {
+                if(!f.value) {
+                    f.classList.add('border-red-500');
+                    valid = false;
+                } else {
+                    f.classList.remove('border-red-500');
+                }
             });
 
-            function show(n) {
-                index = n;
-                title.style.opacity = 0;
-                sub.style.opacity = 0;
-                setTimeout(() => {
-                    title.innerHTML = videoData[n].title;
-                    sub.textContent = videoData[n].subtitle;
-                    title.style.opacity = 1;
-                    sub.style.opacity = 1;
-                    videoData.forEach((v, i) => v.el.style.opacity = i === n ? '1' : '0');
-                    Array.from(dots.children).forEach((d, i) => d.classList.toggle('active', i === n));
-                }, 500);
-            }
+            if(!valid) return;
 
-            // Delay first video show to allow iframe to load
-            setTimeout(() => show(0), 500);
-            setInterval(() => show((index + 1) % videoData.length), 8000);
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            currentStep = 2;
+            updateSteps();
+        };
+
+        document.getElementById('to-step-3').onclick = () => {
+            const requiredFields = document.getElementById('step-2').querySelectorAll('[required]');
+            let valid = true;
+            requiredFields.forEach(f => {
+                if(!f.value) {
+                    f.classList.add('border-red-500');
+                    valid = false;
+                } else {
+                    f.classList.remove('border-red-500');
+                }
+            });
+
+            if(!valid) return;
+
+            updateConfirmationSummary();
+            
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+            currentStep = 3;
+            updateSteps();
+        };
+
+        document.getElementById('back-to-step-1').onclick = () => {
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-1').classList.remove('hidden');
+            currentStep = 1;
+            updateSteps();
+        };
+
+        document.getElementById('back-to-step-2').onclick = () => {
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+            currentStep = 2;
+            updateSteps();
+        };
+
+        function updateSteps() {
+            for(let i=1; i<=3; i++) {
+                const el = document.getElementById(`step-${i}-indicator`);
+                el.classList.toggle('step-active', i === currentStep);
+                el.classList.toggle('step-inactive', i !== currentStep);
+            }
         }
 
-        // --- Reviews Carousel ---
-        function initReviews() {
-            const reviews = [
-                { name: "Sarah M.", text: "This has completely replaced my morning coffee. Clean energy and zero anxiety." },
-                { name: "David K.", text: "The precision dosing is a game-changer. I know exactly what to expect every time." },
-                { name: "Elena R.", text: "Finally, a reliable way to enhance my focus without the stomach issues." },
-                { name: "Marcus T.", text: "Incredible clarity. The 2mg dose is the perfect sweet spot for my creative work." },
-                { name: "Jenny L.", text: "Discreet packaging and fast shipping. The product itself exceeded expectations." },
-                { name: "Sarah K.", text: "I was skeptical, but the trial sold me. It's exactly as described - a subtle lift." },
-                { name: "Mike D.", text: "The product is top-notch. Discreet shipping is a huge plus." },
-                { name: "Jess R.", text: "A perfect tool for deep work sessions. Helps me get into a flow state much faster." }
-            ];
-
-            const carousel = document.getElementById('testimonial-carousel');
-            if (!carousel) return;
-
-            function createCardHTML(r) {
-                return `
-                    <div class="testimonial-card">
-                        <div class="card-bg p-6 rounded-xl border border-slate-800 h-full flex flex-col justify-between shadow-lg">
-                            <div>
-                                <div class="text-sky-400 mb-4 text-xl">★★★★★</div>
-                                <p class="text-slate-300 italic mb-4 leading-relaxed">"${r.text}"</p>
-                            </div>
-                            <p class="text-white font-semibold text-sm">- ${r.name}</p>
-                        </div>
-                    </div>
+        function updateConfirmationSummary() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const shippingState = document.getElementById('state').value;
+            const taxRate = stateTaxRates[shippingState] || 0;
+            const tax = Math.round(subtotal * taxRate * 100) / 100;
+            const total = subtotal + tax;
+            
+            const orderItems = cart.map(item => 
+                `${item.name} × ${item.quantity}: $${(item.price * item.quantity).toFixed(2)}`
+            ).join('<br>');
+            
+            document.getElementById('confirm-summary-text').innerHTML = `
+                <p class="font-semibold mb-2">Order Items:</p>
+                <p class="text-sm mb-4">${orderItems}</p>
+                <p>Subtotal: $${subtotal.toFixed(2)}</p>
+                <p>Tax (${(taxRate * 100).toFixed(2)}%): $${tax.toFixed(2)}</p>
+                <p>Shipping: FREE</p>
+                <p class="font-bold text-white mt-2">Total: $${total.toFixed(2)}</p>
+            `;
+            
+            // Shipping address
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const state = document.getElementById('state').value;
+            const zip = document.getElementById('zip').value;
+            
+            document.getElementById('confirm-shipping-address').innerHTML = `
+                <p class="font-semibold">Shipping Address:</p>
+                <p>${firstName} ${lastName}</p>
+                <p>${address}</p>
+                <p>${city}, ${state} ${zip}</p>
+            `;
+            
+            // Billing address
+            const sameBilling = document.getElementById('same-billing').checked;
+            const billingSection = document.getElementById('confirm-billing-address');
+            
+            if (sameBilling) {
+                billingSection.classList.add('hidden');
+            } else {
+                billingSection.classList.remove('hidden');
+                const billingName = document.getElementById('billing-name').value;
+                const billingAddr = document.getElementById('billing-address').value;
+                const billingCity = document.getElementById('billing-city').value;
+                const billingState = document.getElementById('billing-state').value;
+                const billingZip = document.getElementById('billing-zip').value;
+                
+                billingSection.innerHTML = `
+                    <p class="font-semibold">Billing Address:</p>
+                    <p>${billingName}</p>
+                    <p>${billingAddr}</p>
+                    <p>${billingCity}, ${billingState} ${billingZip}</p>
                 `;
             }
-
-            const allReviews = [...reviews, ...reviews];
-            carousel.innerHTML = allReviews.map(createCardHTML).join('');
         }
 
-        // --- Checkout & Logic ---
-        function initCheckout() {
-            const plans = {
-                trial: { name: 'Trial Pack', price: 12.95 },
-                protocol_10: { name: 'Explorer Box Protocol (10 Pills/mo)', price: 47.56 },
-                protocol_30: { name: 'Optimizer Box Protocol (30 Pills/mo)', price: 128.31 },
-                protocol_60: { name: 'Master Box Protocol (60 Pills/mo)', price: 217.56 },
-                onetime_10: { name: '10 Pills (One-Time)', price: 55.95 },
-                onetime_30: { name: '30 Pills (One-Time)', price: 150.95 },
-                onetime_60: { name: '60 Pills (One-Time)', price: 255.95 }
-            };
-
-            let activePlan = null;
-            let currentStep = 1;
-
-            const cardNumberEl = document.getElementById('card-number');
-            const expiryDateEl = document.getElementById('expiry-date');
-            const cvcEl = document.getElementById('cvc');
-
-            if (cardNumberEl) IMask(cardNumberEl, { mask: '0000 0000 0000 0000' });
-            if (expiryDateEl) IMask(expiryDateEl, { mask: 'MM / YY' });
-            if (cvcEl) IMask(cvcEl, { mask: '0000' });
-
-            document.querySelectorAll('.purchase-btn').forEach(btn => {
-                btn.onclick = (e) => {
-                    activePlan = plans[btn.dataset.plan];
-                    document.getElementById('checkout').classList.remove('hidden');
-                    document.getElementById('order-summary-content').textContent = activePlan.name;
-                    document.getElementById('summary-total').textContent = `$${activePlan.price.toFixed(2)}`;
-                    document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
-                };
-            });
-
-            document.getElementById('to-step-2').onclick = () => {
-                const requiredFields = document.getElementById('step-1').querySelectorAll('[required]');
-                let valid = true;
-                requiredFields.forEach(f => {
-                    if(!f.value) {
-                        f.classList.add('border-red-500');
-                        valid = false;
-                    } else {
-                        f.classList.remove('border-red-500');
-                    }
-                });
-
-                if(!valid) return;
-
-                document.getElementById('step-1').classList.add('hidden');
-                document.getElementById('step-2').classList.remove('hidden');
-                currentStep = 2;
-                updateSteps();
-            };
-
-            document.getElementById('to-step-3').onclick = () => {
-                const requiredFields = document.getElementById('step-2').querySelectorAll('[required]');
-                let valid = true;
-                requiredFields.forEach(f => {
-                    if(!f.value) {
-                        f.classList.add('border-red-500');
-                        valid = false;
-                    } else {
-                        f.classList.remove('border-red-500');
-                    }
-                });
-
-                if(!valid) return;
-
-                document.getElementById('step-2').classList.add('hidden');
-                document.getElementById('step-3').classList.remove('hidden');
-                document.getElementById('confirm-summary-text').textContent = `Order: ${activePlan.name} for $${activePlan.price.toFixed(2)}`;
-                currentStep = 3;
-                updateSteps();
-            };
-
-            document.getElementById('back-to-step-1').onclick = () => {
-                document.getElementById('step-2').classList.add('hidden');
-                document.getElementById('step-1').classList.remove('hidden');
-                currentStep = 1;
-                updateSteps();
-            };
-
-            document.getElementById('back-to-step-2').onclick = () => {
-                document.getElementById('step-3').classList.add('hidden');
-                document.getElementById('step-2').classList.remove('hidden');
-                currentStep = 2;
-                updateSteps();
-            };
-
-            function updateSteps() {
-                for(let i=1; i<=3; i++) {
-                    const el = document.getElementById(`step-${i}-indicator`);
-                    el.classList.toggle('step-active', i === currentStep);
-                    el.classList.toggle('step-inactive', i !== currentStep);
-                }
+        document.getElementById('checkout-form').onsubmit = (e) => {
+            e.preventDefault();
+            
+            const ageVerified = document.getElementById('ageVerified').checked;
+            const legalAccepted = document.getElementById('legalAccepted').checked;
+            
+            if (!ageVerified || !legalAccepted) {
+                alert('Please verify your age and accept the terms to continue.');
+                return;
             }
+            
+            const btn = document.getElementById('confirm-purchase');
+            btn.disabled = true;
+            btn.querySelector('.spinner').classList.remove('hidden');
+            btn.querySelector('.btn-text').classList.add('hidden');
 
-            document.getElementById('checkout-form').onsubmit = (e) => {
-                e.preventDefault();
-                const btn = document.getElementById('confirm-purchase');
-                btn.disabled = true;
-                btn.querySelector('.spinner').classList.remove('hidden');
-                btn.querySelector('.btn-text').classList.add('hidden');
+            setTimeout(() => {
+                document.getElementById('checkout-container').classList.add('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+                
+                // Clear cart after successful order
+                cart = [];
+                saveCart();
+            }, 1500);
+        };
 
-                setTimeout(() => {
-                    document.getElementById('checkout-container').classList.add('hidden');
-                    document.getElementById('success-message').classList.remove('hidden');
-                }, 1500);
-            };
+        document.getElementById('reset-checkout-btn').onclick = () => {
+            location.reload();
+        };
+    }
 
-            document.getElementById('reset-checkout-btn').onclick = () => location.reload();
-        }
+    function initFaqAccordion() {
+        const faqContainer = document.getElementById('faq-container');
+        if (!faqContainer) return;
 
-        function initFaqAccordion() {
-            const faqContainer = document.getElementById('faq-container');
-            if (!faqContainer) return;
+        faqContainer.addEventListener('click', (e) => {
+            const questionButton = e.target.closest('.faq-question');
+            if (!questionButton) return;
 
-            faqContainer.addEventListener('click', (e) => {
-                const questionButton = e.target.closest('.faq-question');
-                if (!questionButton) return;
+            const answer = document.getElementById(questionButton.getAttribute('aria-controls'));
+            const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
 
-                const answer = document.getElementById(questionButton.getAttribute('aria-controls'));
-                const isExpanded = questionButton.getAttribute('aria-expanded') === 'true';
-
-                faqContainer.querySelectorAll('.faq-question').forEach(btn => {
-                    if (btn !== questionButton) {
-                        btn.setAttribute('aria-expanded', 'false');
-                        btn.nextElementSibling.classList.add('hidden');
-                        btn.querySelector('.faq-arrow').classList.remove('rotate-180');
-                    }
-                });
-
-                questionButton.setAttribute('aria-expanded', !isExpanded);
-                answer.classList.toggle('hidden');
-                questionButton.querySelector('.faq-arrow').classList.toggle('rotate-180');
+            faqContainer.querySelectorAll('.faq-question').forEach(btn => {
+                if (btn !== questionButton) {
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.nextElementSibling.classList.add('hidden');
+                    btn.querySelector('.faq-arrow').classList.remove('rotate-180');
+                }
             });
-        }
 
-        function initPricingToggle() {
-            const btnProtocol = document.getElementById('btn-protocol');
-            const btnOneTime = document.getElementById('btn-onetime');
-            const contentProtocol = document.getElementById('content-protocol');
-            const contentOneTime = document.getElementById('content-onetime');
-            const toggleBg = document.getElementById('toggle-bg');
-
-            if (!btnProtocol || !btnOneTime) return;
-
-            btnProtocol.onclick = () => {
-                toggleBg.classList.remove('translate-x-full');
-                toggleBg.classList.add('translate-x-0');
-                
-                btnProtocol.classList.add('text-white');
-                btnProtocol.classList.remove('text-slate-400');
-                btnOneTime.classList.remove('text-white');
-                btnOneTime.classList.add('text-slate-400');
-                
-                contentOneTime.classList.add('hidden');
-                contentOneTime.classList.remove('flex');
-                contentProtocol.classList.remove('hidden');
-                contentProtocol.classList.add('flex');
-            };
-
-            btnOneTime.onclick = () => {
-                toggleBg.classList.remove('translate-x-0');
-                toggleBg.classList.add('translate-x-full');
-                
-                btnOneTime.classList.add('text-white');
-                btnOneTime.classList.remove('text-slate-400');
-                btnProtocol.classList.remove('text-white');
-                btnProtocol.classList.add('text-slate-400');
-                
-                contentProtocol.classList.add('hidden');
-                contentProtocol.classList.remove('flex');
-                contentOneTime.classList.remove('hidden');
-                contentOneTime.classList.add('flex');
-            };
-        }
-
-        initVideoRotator();
-        initReviews(); 
-        initPricingToggle();
-        initCheckout();
-        initFaqAccordion();
-    });
+            questionButton.setAttribute('aria-expanded', !isExpanded);
+            answer.classList.toggle('hidden');
+            questionButton.querySelector('.faq-arrow').classList.toggle('rotate-180');
+        });
+    }
     </script>
-    
 </body>
 </html>
